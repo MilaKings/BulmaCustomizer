@@ -1,36 +1,41 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site Simples</title>
-</head>
-<body>
-    <h1>Olá, mundo!</h1>
-    <p>Bem-vindo ao meu site simples rodando com Node.js!</p>
-    <button id="compileButton">Compilar Sass</button>
-    <script src="scripts/main.js"></script>
-</body>
-</html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My custom Bulma website</title>
+    <link rel="stylesheet" href="bulma.css">
+    <!-- <link rel="stylesheet" href="teste.css"> -->
+  </head>
+  <body>
+     <h1 class="title">
+        Bulma
+      </h1>
 
- -->
+      <p class="subtitle">
+        Modern CSS framework based on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
+      </p>
 
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site Simples</title>
-</head>
-<body>
-    <h1>Olá, mundo!</h1>
-    <p>Bem-vindo ao meu site simples rodando com Node.js!</p>
+      <div class="field">
+        <div class="control">
+          <textarea class="input" id="sassInput" style="width: 452px; height: 167px;">
+            h1 {
+              font-size: 40px;
+              code {
+                font-face: Roboto Mono;
+              }
+            }
+          </textarea>
+        </div>
+      </div>
 
-    <textarea id="sassInput" placeholder="Insira seu código Sass aqui"></textarea>
-    <button id="compileButton">Compilar Sass</button>
-    
-    <div id="output" style="margin-top: 20px;"></div>
+      <div class="buttons">
+        <a class="button is-primary" id="compileButton">Compilar Sass</a>
+        <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
 
-    <script src="scripts/main.js"></script>
-</body>
+        <div id="output2" style="margin-top: 20px; color: blue"></div>
+      </div>
+      <script src="scripts/main.js"></script>
+  </body>
 </html>
