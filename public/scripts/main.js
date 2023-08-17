@@ -2,32 +2,48 @@ const compileButton = document.getElementById('compileButton');
 const sassInput = document.getElementById('sassInput');
 const outputDiv = document.getElementById('output');
 const outputDiv2 = document.getElementById('output2');
+const testCSSCheckBox = document.querySelectorAll('.testarCSS');
+const stylesheetLink = document.getElementById('stylesheet');
+
+testCSSCheckBox[1].addEventListener('click', () => {
+    let currentStylesheet = 'bulma.css';
+    const alternativeStylesheet = './temp/compiled.css';
+    
+    if (testCSSCheckBox[1].checked) {
+        stylesheetLink.href = alternativeStylesheet;
+        currentStylesheet = alternativeStylesheet;
+    } else {
+        stylesheetLink.href = currentStylesheet;
+        currentStylesheet = currentStylesheet;
+    }
+});
 
 compileButton.addEventListener('click', async () => {
-  try {
-      compileButton.classList.add('is-loading');
-      const inputCode = sassInput.value;
+    try {
+        compileButton.classList.add('is-loading');
+        const inputCode = sassInput.value;
 
-      const response = await fetch('/compile-sass', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ inputCode })
-      });
+        const response = await fetch('/compile-sass', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ inputCode })
+        });
 
-      const cssContent = await response.text();
-      outputDiv2.innerText = cssContent;
-      compileButton.classList.remove('is-loading');
+        const cssContent = await response.text();
+        outputDiv2.innerText = cssContent;
+        compileButton.classList.remove('is-loading');
 
-      const blob = new Blob([cssContent], { type: 'text/css' });
-      const url = URL.createObjectURL(blob);
+        const blob = new Blob([cssContent], { type: 'text/css' });
+        const url = URL.createObjectURL(blob);
 
-      outputDiv.href = url;
-      outputDiv.download = 'compiled.css';
+        outputDiv.href = url;
+        outputDiv.download = 'compiled.css';
 
-      ['disabled', 'title'].forEach(attribute => outputDiv.removeAttribute(attribute));
-  } catch (error) {
-      console.error('Erro ao compilar Sass:', error);
-  }
+        ['disabled', 'title'].forEach(attribute => outputDiv.removeAttribute(attribute));
+        testCSSCheckBox.forEach(item => { item.removeAttribute('disabled') });
+    } catch (error) {
+        console.error('Erro ao compilar Sass:', error);
+    }
 });
