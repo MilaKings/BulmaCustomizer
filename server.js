@@ -13,22 +13,28 @@ app.get('/', (req, res) => {
 });
 
 app.post('/compile-sass', (req, res) => {
-  try {
-      const inputCode = req.body.inputCode;
-      if (!inputCode) {
-          return res.status(400).send('Código Sass ausente no corpo da requisição.');
-      }
+    try {
+        const inputCode = req.body.inputCode;
+        if (!inputCode) {
+            return res.status(400).send('Código Sass ausente no corpo da requisição.');
+        }
 
-      const result = sass.renderSync({
-          data: `${inputCode}
+        const result = sass.renderSync({
+            data: `${inputCode}
           @charset "utf-8";
           @import "./node_modules/bulma/bulma.sass";`
-      });
+        });
 
-      res.send(result.css.toString());
-  } catch (error) {
-      res.status(500).send('Erro ao compilar Sass: ' + error.message);
-  }
+        res.send(result.css.toString());
+
+        //------------
+        const cssFilePath = path.join(__dirname, 'public/temp', 'compiled.css');
+        fs.writeFileSync(cssFilePath, result.css.toString());
+        //res.json({ compiledCSSFilePath: cssFilePath });
+        //---------------
+    } catch (error) {
+        res.status(500).send('Erro ao compilar Sass: ' + error.message);
+    }
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,41 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My custom Bulma website</title>
-    <link rel="stylesheet" href="bulma.css">
-    <!-- <link rel="stylesheet" href="teste.css"> -->
-  </head>
-  <body>
-     <h1 class="title">
-        Bulma
-      </h1>
 
-      <p class="subtitle">
-        Modern CSS framework based on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
-      </p>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My custom Bulma website</title>
+  <link id="stylesheet" rel="stylesheet" href="bulma.css">
+</head>
 
-      <div class="field">
-        <div class="control">
-          <textarea class="input" id="sassInput" style="width: 452px; height: 167px;">
-            h1 {
-              font-size: 40px;
-              code {
-                font-face: Roboto Mono;
-              }
-            }
+<body>
+  <h1 class="title">
+    Bulma
+  </h1>
+
+  <p class="subtitle">
+    Modern CSS framework based on <a
+      href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
+  </p>
+
+  <div class="field">
+    <div class="control">
+      <textarea class="input" id="sassInput" style="width: 452px; height: 167px;">
+            // Set your brand colors
+            $purple: #8A4D76;
+            $pink: #FA7C91;
+            $brown: #757763;
+            $beige-light: #D0D1CD;
+            $beige-lighter: #EFF0EB;
+
+            // Update Bulma's global variables
+            $family-sans-serif: "Nunito", sans-serif;
+            $grey-dark: $brown;
+            $grey-light: $beige-light;
+            $primary: $purple;
+            $link: $pink;
+            $widescreen-enabled: false;
+            $fullhd-enabled: false;
+
+            // Update some of Bulma's component variables
+            $body-background-color: $beige-lighter;
+            $control-border-width: 2px;
+            $input-border-color: transparent;
+            $input-shadow: none;
           </textarea>
-        </div>
-      </div>
+    </div>
+  </div>
 
-      <div class="buttons">
-        <a class="button is-primary" id="compileButton">Compilar Sass</a>
-        <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
+  <div class="buttons">
+    <a class="button is-primary" id="compileButton">Compilar Sass</a>
+    <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
+    <label class="checkbox testarCSS" disabled>
+      <input type="checkbox" class="testarCSS" disabled> Testar CSS
+    </label>
+    <div id="output2" style="margin-top: 20px; color: blue"></div>
+  </div>
+  <script src="scripts/main.js"></script>
+</body>
 
-        <div id="output2" style="margin-top: 20px; color: blue"></div>
-      </div>
-      <script src="scripts/main.js"></script>
-  </body>
 </html>
