@@ -7,54 +7,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My custom Bulma website</title>
   <link id="stylesheet" rel="stylesheet" href="bulma.css">
+  <link id="stylesheet" rel="stylesheet" href="customStyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-  <h1 class="title">
-    Bulma
-  </h1>
+  <nav class="navbar is-primary" role="navigation" aria-label="dropdown navigation">
+    <a class="navbar-item">
+      <img src="https://bulma.io/images/bulma-logo.png"
+        alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
 
-  <p class="subtitle">
-    Modern CSS framework based on <a
-      href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
-  </p>
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Docs
+      </a>
 
-  <div class="field">
-    <div class="control">
-      <textarea class="input" id="sassInput" style="width: 452px; height: 167px;">
-            // Set your brand colors
-            $purple: #8A4D76;
-            $pink: #FA7C91;
-            $brown: #757763;
-            $beige-light: #D0D1CD;
-            $beige-lighter: #EFF0EB;
+      <div class="navbar-dropdown">
+        <a class="navbar-item">
+          Overview
+        </a>
+        <a class="navbar-item">
+          Elements
+        </a>
+        <a class="navbar-item">
+          Components
+        </a>
+        <hr class="navbar-divider">
+        <div class="navbar-item">
+          Version 0.9.4
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container is-flex is-flex-direction-row">
+    <!-- <div class="container is-flex is-pulled-left"></div> -->
+    <div class="container is-flex is-pulled-right is-flex-direction-column">
+      <h1 class="title">Bulma Customizer</h1>
 
-            // Update Bulma's global variables
-            $family-sans-serif: "Nunito", sans-serif;
-            $grey-dark: $brown;
-            $grey-light: $beige-light;
-            $primary: $purple;
-            $link: $pink;
-            $widescreen-enabled: false;
-            $fullhd-enabled: false;
+      <p class="subtitle">
+        Modern CSS framework based on <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
+      </p>
 
-            // Update some of Bulma's component variables
-            $body-background-color: $beige-lighter;
-            $control-border-width: 2px;
-            $input-border-color: transparent;
-            $input-shadow: none;
-          </textarea>
+      <div class="tabs is-boxed">
+        <ul>
+          <li class="is-active">
+            <a>
+              <span class="icon is-small">
+                <i class="fa fa-image" aria-hidden="true"></i></span>
+              <span>Pictures</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <span class="icon is-small"><i class="fa fa-music" aria-hidden="true"></i></span>
+              <span>Music</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <span class="icon is-small"><i class="fa fa-film" aria-hidden="true"></i></span>
+              <span>Videos</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="container">
+        <div class="field is-flex is-flex-direction-row is-justify-content-center">
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$primary</strong>
+            <div class="cp_wrapper">
+              <input class="input" type="color" id="sassInput" name="color" value="#00d1b2">
+            </div>
+          </div>
+        </div>
+
+        <div class="buttons container is-fluid">
+          <a class="button is-primary" id="compileButton">Compilar Sass</a>
+          <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
+          <label class="checkbox testarCSS" disabled>
+            <input type="checkbox" class="testarCSS" disabled> Testar CSS
+          </label>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="buttons">
-    <a class="button is-primary" id="compileButton">Compilar Sass</a>
-    <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
-    <label class="checkbox testarCSS" disabled>
-      <input type="checkbox" class="testarCSS" disabled> Testar CSS
-    </label>
-    <div id="output2" style="margin-top: 20px; color: blue"></div>
-  </div>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
   <script src="scripts/main.js"></script>
 </body>
 

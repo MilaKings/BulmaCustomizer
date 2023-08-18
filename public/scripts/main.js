@@ -1,14 +1,13 @@
 const compileButton = document.getElementById('compileButton');
 const sassInput = document.getElementById('sassInput');
 const outputDiv = document.getElementById('output');
-const outputDiv2 = document.getElementById('output2');
 const testCSSCheckBox = document.querySelectorAll('.testarCSS');
 const stylesheetLink = document.getElementById('stylesheet');
 
-testCSSCheckBox[1].addEventListener('click', () => {
+testCSSCheckBox[1].addEventListener('change', () => {
     let currentStylesheet = 'bulma.css';
     const alternativeStylesheet = './temp/compiled.css';
-    
+
     if (testCSSCheckBox[1].checked) {
         stylesheetLink.href = alternativeStylesheet;
         currentStylesheet = alternativeStylesheet;
@@ -32,8 +31,8 @@ compileButton.addEventListener('click', async () => {
         });
 
         const cssContent = await response.text();
-        outputDiv2.innerText = cssContent;
         compileButton.classList.remove('is-loading');
+        testCSSCheckBox[1].checked = false;
 
         const blob = new Blob([cssContent], { type: 'text/css' });
         const url = URL.createObjectURL(blob);
