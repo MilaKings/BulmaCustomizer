@@ -20,18 +20,15 @@ app.post('/compile-sass', (req, res) => {
         }
 
         const result = sass.renderSync({
-            data: `${inputCode}
+            data: `$primary: ${inputCode};
           @charset "utf-8";
           @import "./node_modules/bulma/bulma.sass";`
         });
 
         res.send(result.css.toString());
 
-        //------------
         const cssFilePath = path.join(__dirname, 'public/temp', 'compiled.css');
         fs.writeFileSync(cssFilePath, result.css.toString());
-        //res.json({ compiledCSSFilePath: cssFilePath });
-        //---------------
     } catch (error) {
         res.status(500).send('Erro ao compilar Sass: ' + error.message);
     }
