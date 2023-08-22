@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <nav class="navbar is-primary" role="navigation" aria-label="dropdown navigation">
+  <nav class="navbar is-info" role="navigation" aria-label="dropdown navigation">
     <a class="navbar-item">
       <img src="https://bulma.io/images/bulma-logo.png"
         alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
@@ -77,9 +77,25 @@
       <div class="container">
         <div class="field is-flex is-flex-direction-row is-justify-content-center">
           <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">@import url</strong>
+            <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url" value="https://fonts.googleapis.com/css?family=Tangerine">
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
             <strong class="is-size-6">$primary</strong>
             <div class="cp_wrapper">
-              <input class="input" type="color" id="sassInput" name="color" value="#00d1b2">
+              <input class="input bulma-variable" type="color" id="$primary" name="color" value="#00d1b2">
+            </div>
+            <div class="control m-2 is-flex is-flex-direction-row level-item">
+              <strong class="is-size-6">$link</strong>
+              <div class="cp_wrapper">
+                <input class="input bulma-variable" type="color" id="$link" name="color" value="#485fc7">
+              </div>
+            </div>
+            <div class="control m-2 is-flex is-flex-direction-row level-item">
+              <strong class="is-size-6">$body-background-color</strong>
+              <div class="cp_wrapper">
+                <input class="input bulma-variable" type="color" id="$body-background-color" name="color" value="#ffffff">
+              </div>
             </div>
           </div>
         </div>
