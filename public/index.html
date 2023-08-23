@@ -22,7 +22,6 @@
       <a class="navbar-link">
         Docs
       </a>
-
       <div class="navbar-dropdown">
         <a class="navbar-item">
           Overview
@@ -52,63 +51,94 @@
 
       <div class="tabs is-boxed">
         <ul>
-          <li class="is-active">
+          <li class="is-active tab-link" onclick="openTab(event, 'pictures')">
             <a>
               <span class="icon is-small">
                 <i class="fa fa-image" aria-hidden="true"></i></span>
               <span>Pictures</span>
             </a>
           </li>
-          <li>
+          <li class="tab-link" onclick="openTab(event, 'music')">
             <a>
-              <span class="icon is-small"><i class="fa fa-music" aria-hidden="true"></i></span>
+              <span class="icon is-small">
+                <i class="fa fa-music" aria-hidden="true"></i></span>
               <span>Music</span>
             </a>
           </li>
-          <li>
+          <li class="tab-link" onclick="openTab(event, 'videos')">
             <a>
-              <span class="icon is-small"><i class="fa fa-film" aria-hidden="true"></i></span>
+              <span class="icon is-small">
+                <i class="fa fa-film" aria-hidden="true"></i></span>
               <span>Videos</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <div class="container">
+      <div class="container tab-content display-block" id="pictures">
         <div class="field is-flex is-flex-direction-row is-justify-content-center">
           <div class="control m-2 is-flex is-flex-direction-row level-item">
             <strong class="is-size-6">@import url</strong>
-            <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url" value="https://fonts.googleapis.com/css?family=Tangerine">
+            <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url"
+              value="https://fonts.googleapis.com/css?family=Tangerine">
           </div>
           <div class="control m-2 is-flex is-flex-direction-row level-item">
             <strong class="is-size-6">$primary</strong>
             <div class="cp_wrapper">
               <input class="input bulma-variable" type="color" id="$primary" name="color" value="#00d1b2">
             </div>
-            <div class="control m-2 is-flex is-flex-direction-row level-item">
-              <strong class="is-size-6">$link</strong>
-              <div class="cp_wrapper">
-                <input class="input bulma-variable" type="color" id="$link" name="color" value="#485fc7">
-              </div>
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$link</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$link" name="color" value="#485fc7">
             </div>
-            <div class="control m-2 is-flex is-flex-direction-row level-item">
-              <strong class="is-size-6">$body-background-color</strong>
-              <div class="cp_wrapper">
-                <input class="input bulma-variable" type="color" id="$body-background-color" name="color" value="#ffffff">
-              </div>
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$body-background-color</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$body-background-color" name="color" value="#ffffff">
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="buttons container is-fluid">
-          <a class="button is-primary" id="compileButton">Compilar Sass</a>
-          <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
-          <label class="checkbox testarCSS" disabled>
-            <input type="checkbox" class="testarCSS" disabled> Testar CSS
-          </label>
+      <div class="container tab-content not-visible" id="music">
+        <div class="field is-flex is-flex-direction-row is-justify-content-center">
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">@import url</strong>
+            <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url"
+              value="https://fonts.googleapis.com/css?family=Tangerine">
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$primary</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$primary" name="color" value="#00d1b2">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container tab-content not-visible" id="videos">
+        <div class="field is-flex is-flex-direction-row is-justify-content-center">
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$body-background-color</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$body-background-color" name="color" value="#ffffff">
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+  </div>
+  <div class="buttons container is-fluid is-justify-content-center">
+    <a class="button is-primary" id="compileButton">Compilar Sass</a>
+    <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
+    <label class="checkbox testarCSS" disabled>
+      <input type="checkbox" class="testarCSS" disabled> Testar CSS
+    </label>
+  </div>
+  </div>
   </div>
   <footer class="footer">
     <div class="content has-text-centered">

@@ -1,8 +1,19 @@
 const compileButton = document.getElementById('compileButton');
-//const sassInput = document.getElementById('sassInput');
-const outputDiv = document.getElementById('output');
 const testCSSCheckBox = document.querySelectorAll('.testarCSS');
 const stylesheetLink = document.getElementById('stylesheet');
+
+function openTab(event, tabId) {
+  let tabContent = document.querySelectorAll('.tab-content');
+  tabContent.forEach(tab => { tab.classList.add('not-visible'); });
+
+  let tabLink = document.querySelectorAll('.tab-link');
+  tabLink.forEach(tab => { tab.classList.remove('is-active'); });
+
+  let currentTab = document.getElementById(tabId);
+  currentTab.classList.remove('not-visible');
+  currentTab.classList.add('display-block');
+  event.currentTarget.classList.add('is-active');
+}
 
 testCSSCheckBox[1].addEventListener('change', () => {
   let currentStylesheet = 'bulma.css';
