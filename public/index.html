@@ -8,7 +8,7 @@
   <title>My custom Bulma website</title>
   <link id="stylesheet" rel="stylesheet" href="bulma.css">
   <link id="stylesheet" rel="stylesheet" href="customStyle.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/18c8e0d8f1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
   </nav>
   <div class="container is-flex is-flex-direction-row">
     <!-- <div class="container is-flex is-pulled-left"></div> -->
-    <div class="container is-flex is-pulled-right is-flex-direction-column">
+    <div class="container is-flex-direction-column">
       <h1 class="title">Bulma Customizer</h1>
 
       <p class="subtitle">
@@ -55,17 +55,18 @@
             <a>
               <span class="icon is-small">
                 <i class="fa fa-image" aria-hidden="true"></i></span>
-              <span>Pictures</span>
+              <span>Variáveis</span>
             </a>
           </li>
           <li class="tab-link" onclick="openTab(event, 'music')">
             <a>
               <span class="icon is-small">
-                <i class="fa fa-music" aria-hidden="true"></i></span>
-              <span>Music</span>
+                <i class="fa fa-pencil" aria-hidden="true"></i></span>
+              <span>Criar Classes</span>
             </a>
           </li>
-          <li class="tab-link" onclick="openTab(event, 'videos')">
+          <!-- <li class="tab-link" onclick="openTab(event, 'videos')"> -->
+          <li class="tab-link"> 
             <a>
               <span class="icon is-small">
                 <i class="fa fa-film" aria-hidden="true"></i></span>
@@ -75,8 +76,8 @@
         </ul>
       </div>
 
-      <div class="container tab-content display-block" id="pictures">
-        <div class="field is-flex is-flex-direction-row is-justify-content-center">
+      <div class="container tab-content is-hidden" id="pictures">
+        <div class="field is-flex is-flex-direction-row is-justify-content-space-around">
           <div class="control m-2 is-flex is-flex-direction-row level-item">
             <strong class="is-size-6">@import url</strong>
             <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url"
@@ -103,37 +104,77 @@
         </div>
       </div>
 
-      <div class="container tab-content not-visible" id="music">
-        <div class="field is-flex is-flex-direction-row is-justify-content-center">
-          <div class="control m-2 is-flex is-flex-direction-row level-item">
-            <strong class="is-size-6">@import url</strong>
-            <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url"
-              value="https://fonts.googleapis.com/css?family=Tangerine">
+      <div class="container tab-content display-block" id="music">
+        <div class="field container is-flex-direction-column">
+          <div class="container is-flex-direction-row is-flex is-justify-content-space-between">
+            <div class="field m-2 is-small-custom">
+              <label class="label">Nome da classe</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+            <p class="buttons is-align-content-flex-start">
+              <button class="button">
+                <span class="icon has-text-danger">
+                  <i class="fa-solid fa-x"></i>
+                </span>
+              </button>
+            </p>
           </div>
-          <div class="control m-2 is-flex is-flex-direction-row level-item">
-            <strong class="is-size-6">$primary</strong>
-            <div class="cp_wrapper">
-              <input class="input bulma-variable" type="color" id="$primary" name="color" value="#00d1b2">
+          <div class="container is-flex is-flex-direction-row">
+            <div class="field m-2 is-small-custom">
+              <label class="label">display</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+            <div class="field m-2 is-small-custom">
+              <label class="label">flex-direction</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+            <div class="field m-2 is-small-custom">
+              <label class="label">justify-content</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
             </div>
           </div>
+          <hr class="solid">
+          <div class="container is-flex-direction-row is-flex is-justify-content-space-between">
+            <div class="field m-2 is-small-custom">
+              <label class="label">Nome da classe</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+            <p class="buttons is-align-content-flex-start">
+              <button class="button">
+                <span class="icon is-large has-text-info">
+                  <i class="fa fa-plus"></i>
+                </span>
+              </button>
+            </p>
+          </div>
+          <div class="container is-flex is-flex-direction-row">
+            <div class="field m-2 is-small-custom">
+              <label class="label">display</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+            <div class="field m-2 is-small-custom">
+              <label class="label">flex-direction</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+            <div class="field m-2 is-small-custom">
+              <label class="label">justify-content</label>
+              <input class="input custom-variable" type="text" id="display" placeholder="flex, block, none, etc.">
+            </div>
+          </div>
+          <hr class="solid">
         </div>
       </div>
-      <div class="container tab-content not-visible" id="videos">
-        <div class="field is-flex is-flex-direction-row is-justify-content-center">
-          <div class="control m-2 is-flex is-flex-direction-row level-item">
-            <strong class="is-size-6">$body-background-color</strong>
-            <div class="cp_wrapper">
-              <input class="input bulma-variable" type="color" id="$body-background-color" name="color" value="#ffffff">
-            </div>
-          </div>
-        </div>
+      <div class="container tab-content is-hidden" id="videos">
+        <!-- empty -->
       </div>
     </div>
 
   </div>
   <div class="buttons container is-fluid is-justify-content-center">
-    <a class="button is-primary" id="compileButton">Compilar Sass</a>
-    <a class="button is-link" id="output" title="Disabled button" disabled>Baixar CSS</a>
+    <a class="button is-primary" id="compileButton">
+      <span class="icon is-small"><i class="fa-solid fa-rotate" aria-hidden="true"></i></span><span>Compilar Sass</span></a>
+    <a class="button is-link" id="downloadButton" title="Disabled button" disabled>
+      <span class="icon is-small"><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i></span><span>Baixar CSS</span></a>
     <label class="checkbox testarCSS" disabled>
       <input type="checkbox" class="testarCSS" disabled> Testar CSS
     </label>

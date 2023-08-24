@@ -1,16 +1,17 @@
 const compileButton = document.getElementById('compileButton');
 const testCSSCheckBox = document.querySelectorAll('.testarCSS');
 const stylesheetLink = document.getElementById('stylesheet');
+let downloadButton = document.getElementById('downloadButton');
 
 function openTab(event, tabId) {
   let tabContent = document.querySelectorAll('.tab-content');
-  tabContent.forEach(tab => { tab.classList.add('not-visible'); });
+  tabContent.forEach(tab => { tab.classList.add('is-hidden'); });
 
   let tabLink = document.querySelectorAll('.tab-link');
   tabLink.forEach(tab => { tab.classList.remove('is-active'); });
 
   let currentTab = document.getElementById(tabId);
-  currentTab.classList.remove('not-visible');
+  currentTab.classList.remove('is-hidden');
   currentTab.classList.add('display-block');
   event.currentTarget.classList.add('is-active');
 }
@@ -35,22 +36,21 @@ compileButton.addEventListener('click', async () => {
     let sassString = '';
     let importUrlString = '';
     let urlFont = '';
+
     bulmaVariables.forEach(item => {
       if (item.id === "@import url") {
         importUrlString = `@import url('${item.value}');\n`;
         urlFont = item.value;
       } else {
-        sassString += `
-          ${item.id}: ${item.value};`;
+        sassString += `\n${item.id}: ${item.value};`;
       }
     });
 
-    urlFont = extractFontNameFromUrl(urlFont);
+    urlFont = extractFontFamilyFromUrl(urlFont);
     if (importUrlString && urlFont) {
-      sassString = `${importUrlString} ${sassString}
-      $family-sans-serif: ${urlFont}, sans-serif;
-      `;
+      sassString = `${importUrlString} ${sassString} \n$family-sans-serif: ${urlFont}, sans-serif;`;
     }
+
     console.log(sassString);
     const response = await fetch('/compile-sass', {
       method: 'POST',
@@ -65,18 +65,18 @@ compileButton.addEventListener('click', async () => {
     const blob = new Blob([cssContent], { type: 'text/css' });
     const url = URL.createObjectURL(blob);
 
-    outputDiv.href = url;
-    outputDiv.download = 'compiled.css';
+    downloadButton.href = url;
+    downloadButton.download = 'compiled.css';
 
-    ['disabled', 'title'].forEach(attribute => outputDiv.removeAttribute(attribute));
+    ['disabled', 'title'].forEach(attribute => downloadButton.removeAttribute(attribute));
     testCSSCheckBox.forEach(item => { item.removeAttribute('disabled') });
   } catch (error) {
     console.error('Erro ao compilar Sass:', error);
   }
 });
 
-function extractFontNameFromUrl(url) {
-  const fontNameRegex = /family=([^&:]+)/;
+function extractFontFamilyFromUrl(url) {
+  const fontNameRegex = /https?:\/\/fonts.googleapis.com\/css\?family=([^&:]+)/;
   const match = url.match(fontNameRegex);
 
   return (match && match[1]) ? match[1] : false;

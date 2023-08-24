@@ -1,4 +1,8 @@
 
+.is-small-custom {
+  width: 14em;
+}
+
 input[type="color"] {
   appearance: none;
   -moz-appearance: none;
