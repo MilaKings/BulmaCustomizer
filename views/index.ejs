@@ -1,0 +1,256 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulma Customizer</title>
+  <link rel="stylesheet" id="main-css" href="/css/bulma.css">
+  <link rel="stylesheet" href="/css/customStyle.css">
+  <script src="https://kit.fontawesome.com/18c8e0d8f1.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar is-info" role="navigation" aria-label="dropdown navigation">
+    <a class="navbar-item">
+      <img src="https://bulma.io/images/bulma-logo.png"
+        alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Docs
+      </a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item">
+          Overview
+        </a>
+        <a class="navbar-item">
+          Elements
+        </a>
+        <a class="navbar-item">
+          Components
+        </a>
+        <hr class="navbar-divider">
+        <div class="navbar-item">
+          Version 0.9.4
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container is-flex is-flex-direction-row">
+    <!-- <div class="container is-flex is-pulled-left"></div> -->
+    <div class="container is-flex-direction-column">
+      <h1 class="title">Bulma Customizer</h1>
+
+      <p class="subtitle">
+        Modern CSS framework based on <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">Flexbox</a>
+      </p>
+
+      <div class="tabs is-boxed">
+        <ul>
+          <li class="is-active tab-link" onclick="openTab(event, 'pictures')">
+            <a>
+              <span class="icon is-small">
+                <i class="fa fa-image" aria-hidden="true"></i></span>
+              <span>Variáveis</span>
+            </a>
+          </li>
+          <li class="tab-link" onclick="openTab(event, 'add-class')">
+            <a>
+              <span class="icon is-small">
+                <i class="fa-solid fa-pen-to-square"></i></span>
+              <span>Criar Classes</span>
+            </a>
+          </li>
+          <li class="tab-link" onclick="openTab(event, 'videos')">
+            <!-- <li class="tab-link"> -->
+            <a>
+              <span class="icon is-small">
+                <i class="fa fa-film" aria-hidden="true"></i></span>
+              <span>Videos</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="container tab-content" id="pictures">
+        <div class="field is-flex is-flex-direction-row is-justify-content-space-around">
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">@import url</strong>
+            <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url"
+              value="https://fonts.googleapis.com/css?family=Tangerine">
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$primary</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$primary" name="color" value="#00d1b2">
+            </div>
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$link</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$link" name="color" value="#485fc7">
+            </div>
+          </div>
+          <div class="control m-2 is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6">$body-background-color</strong>
+            <div class="cp_wrapper">
+              <input class="input bulma-variable" type="color" id="$body-background-color" name="color" value="#ffffff">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container tab-content  is-hidden display-block" id="add-class">
+        <div id="add-class-container" class="field container is-flex-direction-column">
+          <p class="title is-4">Criar Classes</p>
+          <p class="m-2">Que tal adicionar uma classe personalizada com os atributos de CSS do jeito que você
+            quiser?</p>
+          <div class="container is-flex is-justify-content-center mb-4">
+            <button class="button is-info is-outlined m-2" id="add-custom-class">Clique aqui para
+              começar!</button>
+          </div>
+        </div>
+
+
+        <!-- <div class="field container is-flex-direction-column">
+          <div class="container is-flex-direction-row is-flex is-justify-content-space-between">
+            <div class="custom-variable field m-2 is-small-custom">
+              <label class="label">Nome da classe</label>
+              <input class="input" type="text" id="display">
+            </div>
+            <p class="buttons is-align-content-flex-start">
+              <button class="button">
+                <span class="icon has-text-danger">
+                  <i class="fa-solid fa-x"></i>
+                </span>
+              </button>
+            </p>
+          </div>
+          <div class="container is-flex is-flex-direction-row">
+            <div class="custom-variable field m-2">
+              <label class="label">display</label>
+              <div class="select">
+                <select>
+                  <option>flex</option>
+                  <option>block</option>
+                  <option>none</option>
+                </select>
+              </div>
+            </div>
+            <div class="custom-variable field m-2">
+              <label class="label">flex-direction</label>
+              <div class="select">
+                <select>
+                  <option>row</option>
+                  <option>column</option>
+                  <option>row-reverse</option>
+                  <option>column-reverse</option>
+                </select>
+              </div>
+            </div>
+            <div class=" custom-variable field m-2">
+              <label class="label">justify-content</label>
+              <div class="select">
+                <select>
+                  <option>center</option>
+                  <option>start</option>
+                  <option>space-between</option>
+                  <option>space-around</option>
+                  <option>space-evenly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <hr class="solid"> -->
+
+        <!-- <div class="container is-flex-direction-row is-flex is-justify-content-space-between">
+            <div class="field m-2 is-small-custom">
+              <label class="label">Nome da classe</label>
+              <input class="input custom-variable" type="text" id="display">
+            </div>
+            <p class="buttons is-align-content-flex-start">
+              <button class="button">
+                <span class="icon is-large has-text-info">
+                  <i class="fa fa-plus"></i>
+                </span>
+              </button>
+              <button class="button">
+                <span class="icon has-text-danger">
+                  <i class="fa-solid fa-x"></i>
+                </span>
+              </button>
+            </p>
+          </div>
+          <div class="container is-flex is-flex-direction-row">
+            <div class="field m-2">
+              <label class="label">display</label>
+              <div class="select">
+                <select>
+                  <option>flex</option>
+                  <option>block</option>
+                  <option>none</option>
+                </select>
+              </div>
+            </div>
+            <div class="field m-2">
+              <label class="label">flex-direction</label>
+              <div class="select">
+                <select>
+                  <option>row</option>
+                  <option>column</option>
+                  <option>row-reverse</option>
+                  <option>column-reverse</option>
+                </select>
+              </div>
+            </div>
+            <div class="field m-2">
+              <label class="label">justify-content</label>
+              <div class="select">
+                <select>
+                  <option>center</option>
+                  <option>start</option>
+                  <option>space-between</option>
+                  <option>space-around</option>
+                  <option>space-evenly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <hr class="solid"> -->
+      </div>
+    </div>
+    <div class="container tab-content is-hidden" id="videos">
+      <!-- empty -->
+    </div>
+  </div>
+
+  </div>
+  <div class="buttons container is-fluid is-justify-content-center">
+    <a class="button is-primary" id="compileButton">
+      <span class="icon is-small"><i class="fa-solid fa-rotate" aria-hidden="true"></i></span><span>Compilar
+        Sass</span></a>
+    <a class="button is-link" id="downloadButton" title="Disabled button" disabled>
+      <span class="icon is-small"><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i></span><span>Baixar
+        CSS</span></a>
+    <label class="checkbox testarCSS" disabled>
+      <input type="checkbox" class="testarCSS" disabled> Testar CSS
+    </label>
+  </div>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
+  <script src="/js/scripts.js"></script>
+</body>
+
+</html>
