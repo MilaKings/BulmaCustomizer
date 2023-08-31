@@ -3,21 +3,28 @@ const testCSSCheckBox = document.querySelectorAll('.testarCSS');
 const stylesheetLink = document.getElementById('main-css');
 let downloadButton = document.getElementById('downloadButton');
 let addCssClassesTemplateButtom = document.getElementById('add-custom-class');
+let addClassContainer = document.getElementById('add-class-container');
+const tabs = document.querySelector('ul');
+let index = 0;
 let cssContent = '';
 let addClassTab = '';
+let addNewClass = '';
+let removeNewClass = '';
 
-function openTab(event, tabId) {
+import * as template from './templates.js';
+
+function openTab(tabId) {
   let tabContent = document.querySelectorAll('.tab-content');
   tabContent.forEach(tab => { tab.classList.add('is-hidden'); });
 
   let tabLink = document.querySelectorAll('.tab-link');
   tabLink.forEach(tab => { tab.classList.remove('is-active'); });
 
-  let currentTab = document.getElementById(tabId);
-  console.log(currentTab);
-  currentTab.classList.remove('is-hidden');
-  currentTab.classList.add('display-block');
-  event.currentTarget.classList.add('is-active');
+  let currentTabLink = document.getElementById(tabId);
+  currentTabLink.classList.add('is-active');
+  let currentTabContainer = document.getElementById(tabId + '-container');
+  currentTabContainer.classList.remove('is-hidden');
+  currentTabContainer.classList.add('display-block');
 }
 
 function changePageStyle() {
@@ -64,15 +71,63 @@ function createSassString() {
   return sassString;
 }
 
-addCssClassesTemplateButtom.addEventListener('click', () => {
-  let addCustomClassesTemplate = document.getElementById('add-class-container');
-  addCustomClassesTemplate.remove();
+function addCreateNewCustomClass() {
+  let addCustomClassesTemplate = document.getElementById('add-class-content');
+  addCustomClassesTemplate.classList.add('is-hidden');
 
-  addClassTab = document.getElementById('add-class');
-  addClassTab.innerHTML = addCustomCssClassTemplate(1);
-});
+  addClassTab = document.getElementById('add-class-container');
+  addClassTab.insertAdjacentHTML('beforeend', template.addCustomCssClassTemplate(index));
+  addClassTab.classList.remove('is-hidden');
+  addNewClass = document.getElementById('plus-button-' + index);
+  addNewClass.onclick = () => { addNewClassContainer() };
+
+  removeNewClass = document.getElementById('minus-button-' + index);
+  removeNewClass.onclick = () => { removeAddClassContainer(event) };
+  index++;
+}
+
+function getElementByIdNumber(elementId, idPrefix) {
+  let idNumber = elementId.split('-');
+  let mountElementId = idPrefix + idNumber[idNumber.length - 1];
+  let element = document.getElementById(mountElementId);
+
+  return element;
+}
+
+function removeAddClassContainer(event) {
+  let addCustomClassContainer = getElementByIdNumber(event.currentTarget.id, 'add-class-container-');
+  addCustomClassContainer.remove();
+
+  keepCustomClassContainerButtonsLogic();
+}
+
+function keepCustomClassContainerButtonsLogic() {
+  if (addClassContainer.childElementCount == 1) {
+    addClassContainer.firstElementChild.classList.remove('is-hidden');
+  } else if (addClassContainer.childElementCount == 2) {
+    let closeButton = getElementByIdNumber(addClassContainer.children[1].id, 'minus-button-');
+    let newPlusButton = template.addPlusButton(addClassContainer.children[1].id);
+    if (!closeButton.previousElementSibling) closeButton.insertAdjacentHTML('beforebegin', newPlusButton);
+    //fazer o contrario e adicionar o + quando o que tinha + x for deletado
+  }
+}
+
+function addNewClassContainer() {
+  addNewClass.remove();
+  addCreateNewCustomClass();
+}
 
 testCSSCheckBox[1].addEventListener('change', async () => { changePageStyle() });
+
+tabs.addEventListener('click', () => {
+  const tabClicked = event.target.closest('li');
+  openTab(tabClicked.id);
+})
+
+addCssClassesTemplateButtom.addEventListener('click', () => {
+  addCreateNewCustomClass();
+  index++;
+});
 
 compileButton.addEventListener('click', async () => {
   try {
@@ -101,63 +156,3 @@ compileButton.addEventListener('click', async () => {
     console.error('Erro ao compilar Sass:', error);
   }
 });
-
-function addCustomCssClassTemplate(a) {
-  let addCssClassesTemplate = `<div id=${a} class="field container is-flex-direction-column">
-<div class="container is-flex-direction-row is-flex is-justify-content-space-between">
-  <div class="custom-variable field m-2 is-small-custom">
-    <label class="label">Nome da classe</label>
-    <input class="input" type="text" id="display">
-  </div>
-  <p class="buttons is-align-content-flex-start">
-    <button id="plus-button" class="button">
-      <span class="icon is-large has-text-info">
-        <i class="fa fa-plus"></i>
-      </span>
-    </button>
-    <button class="button">
-      <span class="icon has-text-danger">
-        <i class="fa-solid fa-x"></i>
-      </span>
-    </button>
-  </p>
-</div>
-<div class="container is-flex is-flex-direction-row">
-  <div class="custom-variable field m-2">
-    <label class="label">display</label>
-    <div class="select">
-      <select>
-        <option>flex</option>
-        <option>block</option>
-        <option>none</option>
-      </select>
-    </div>
-  </div>
-  <div class="custom-variable field m-2">
-    <label class="label">flex-direction</label>
-    <div class="select">
-      <select>
-        <option>row</option>
-        <option>column</option>
-        <option>row-reverse</option>
-        <option>column-reverse</option>
-      </select>
-    </div>
-  </div>
-  <div class=" custom-variable field m-2">
-    <label class="label">justify-content</label>
-    <div class="select">
-      <select>
-        <option>center</option>
-        <option>start</option>
-        <option>space-between</option>
-        <option>space-around</option>
-        <option>space-evenly</option>
-      </select>
-    </div>
-  </div>
-</div>
-<hr class="solid">`;
-
-  return addCssClassesTemplate;
-}
