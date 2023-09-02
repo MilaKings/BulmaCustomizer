@@ -6,14 +6,14 @@ function addCustomCssClassTemplate(index) {
       <input class="input" type="text" id="display">
     </div>
     <p id="buttons-container-${index}" class="buttons is-align-content-flex-start">
-      <button id="plus-button-${index}" class="button">
+      <button id="plus-button-${index}" class="button" title="Adicionar classe">
         <span class="icon is-large has-text-info">
           <i class="fa fa-plus"></i>
         </span>
       </button>
-      <button id="minus-button-${index}" class="button">
+      <button id="minus-button-${index}" class="button close-button" title="Deletar classe">
         <span class="icon has-text-danger">
-          <i class="fa-solid fa-x"></i>
+        <i class="fa-solid fa-trash"></i>
         </span>
       </button>
     </p>
@@ -59,7 +59,7 @@ function addCustomCssClassTemplate(index) {
 }
 
 function addPlusButton(index) {
-  let plusButtonTemplate = `<button id="plus-button-${index}" class="button">
+  let plusButtonTemplate = `<button id="plus-button-${index}" class="button" title="Adicionar classe">
   <span class="icon is-large has-text-info">
     <i class="fa fa-plus"></i>
   </span>

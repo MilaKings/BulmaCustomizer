@@ -82,38 +82,39 @@ function addCreateNewCustomClass() {
   addNewClass.onclick = () => { addNewClassContainer() };
 
   removeNewClass = document.getElementById('minus-button-' + index);
-  removeNewClass.onclick = () => { removeAddClassContainer(event) };
+  removeNewClass.onclick = () => { removeAddClassContainer() };
   index++;
 }
 
-function getElementByIdNumber(elementId, idPrefix) {
+function getElementByMatchedIdNumber(elementId, idPrefix) {
   let idNumber = elementId.split('-');
-  let mountElementId = idPrefix + idNumber[idNumber.length - 1];
-  let element = document.getElementById(mountElementId);
+  let element = document.getElementById(idPrefix + idNumber[idNumber.length - 1]);
 
   return element;
 }
 
-function removeAddClassContainer(event) {
-  let addCustomClassContainer = getElementByIdNumber(event.currentTarget.id, 'add-class-container-');
+function removeAddClassContainer() {
+  let addCustomClassContainer = getElementByMatchedIdNumber(event.currentTarget.id, 'add-class-container-');
+  let closeButton = document.querySelectorAll('.close-button');
+  let lastCloseButton = closeButton[closeButton.length - 1];
+  let clickedCloseButtonId = event.currentTarget.id;
+  
   addCustomClassContainer.remove();
 
-  keepCustomClassContainerButtonsLogic();
-}
-
-function keepCustomClassContainerButtonsLogic() {
   if (addClassContainer.childElementCount == 1) {
-    addClassContainer.firstElementChild.classList.remove('is-hidden');
-  } else if (addClassContainer.childElementCount == 2) {
-    let closeButton = getElementByIdNumber(addClassContainer.children[1].id, 'minus-button-');
-    let newPlusButton = template.addPlusButton(addClassContainer.children[1].id);
-    if (!closeButton.previousElementSibling) closeButton.insertAdjacentHTML('beforebegin', newPlusButton);
-    //fazer o contrario e adicionar o + quando o que tinha + x for deletado
+    addClassContainer.firstElementChild.classList.remove('is-hidden');    
+  } else if (lastCloseButton.id == clickedCloseButtonId) {
+    let newPlusIdNumber = closeButton[closeButton.length - 2].id.split('-');
+    let newPlusButton = template.addPlusButton(newPlusIdNumber[2]);
+    closeButton[closeButton.length - 2].insertAdjacentHTML('beforebegin', newPlusButton);
+    newPlusButton = document.getElementById('plus-button-' + newPlusIdNumber[2]);
+    newPlusButton.onclick = () => { addNewClassContainer() };
   }
 }
 
 function addNewClassContainer() {
-  addNewClass.remove();
+  let plusClickedButton = document.getElementById(event.currentTarget.id);
+  plusClickedButton.remove();
   addCreateNewCustomClass();
 }
 
@@ -126,7 +127,6 @@ tabs.addEventListener('click', () => {
 
 addCssClassesTemplateButtom.addEventListener('click', () => {
   addCreateNewCustomClass();
-  index++;
 });
 
 compileButton.addEventListener('click', async () => {
