@@ -48,7 +48,6 @@ function extractFontFamilyFromUrl(url) {
 }
 
 function createSassString() {
-  // let customVariables = document.querySelectorAll('.custom-variable');   
   let bulmaVariables = document.querySelectorAll('.bulma-variable');
   let importUrlString = '';
   let urlFont = '';
@@ -71,6 +70,31 @@ function createSassString() {
   return sassString;
 }
 
+function createCustomCss() {
+  let customClass = document.querySelectorAll('.custom-class');
+  let customCssString = '';
+  let customAttributesString = '';
+
+  if (customClass) {
+    for (let i = 0; i < customClass.length; i++) {
+      let className = customClass[i].querySelector('.class-name').value;
+      let customAttribute = customClass[i].querySelectorAll('.custom-class-attribute');
+      let attributeValue = customClass[i].querySelectorAll('.custom-class-value');
+
+      for (let j = 0; j < customAttribute.length; j++) {
+        customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value};`;
+      }
+
+      customCssString += `\n.${className} {${customAttributesString}\n}\n`;
+      customAttributesString = '';
+    }
+
+    return customCssString;
+  } else {
+    return false;
+  }
+}
+
 function addCreateNewCustomClass() {
   let addCustomClassesTemplate = document.getElementById('add-class-content');
   addCustomClassesTemplate.classList.add('is-hidden');
@@ -81,7 +105,7 @@ function addCreateNewCustomClass() {
   addNewClass = document.getElementById('plus-button-' + index);
   addNewClass.onclick = () => { addNewClassContainer() };
 
-  removeNewClass = document.getElementById('minus-button-' + index);
+  removeNewClass = document.getElementById('trash-button-' + index);
   removeNewClass.onclick = () => { removeAddClassContainer() };
   index++;
 }
@@ -98,11 +122,11 @@ function removeAddClassContainer() {
   let closeButton = document.querySelectorAll('.close-button');
   let lastCloseButton = closeButton[closeButton.length - 1];
   let clickedCloseButtonId = event.currentTarget.id;
-  
+
   addCustomClassContainer.remove();
 
   if (addClassContainer.childElementCount == 1) {
-    addClassContainer.firstElementChild.classList.remove('is-hidden');    
+    addClassContainer.firstElementChild.classList.remove('is-hidden');
   } else if (lastCloseButton.id == clickedCloseButtonId) {
     let newPlusIdNumber = closeButton[closeButton.length - 2].id.split('-');
     let newPlusButton = template.addPlusButton(newPlusIdNumber[2]);
@@ -141,6 +165,9 @@ compileButton.addEventListener('click', async () => {
     });
 
     cssContent = await response.text();
+    let customClassesString = createCustomCss();
+    if (customClassesString) cssContent += `${cssContent} \n${customClassesString}`;
+
     compileButton.classList.remove('is-loading');
     testCSSCheckBox[1].checked = false;
 

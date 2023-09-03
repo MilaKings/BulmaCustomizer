@@ -1,9 +1,10 @@
 function addCustomCssClassTemplate(index) {
-  let addCssClassesTemplate = `<div id="add-class-container-${index}" class="field container is-flex-direction-column">
+  let addCssClassesTemplate = `
+  <div id="add-class-container-${index}" class="custom-class field container is-flex-direction-column">
   <div class="container is-flex-direction-row is-flex is-justify-content-space-between">
-    <div class="custom-variable field m-2 is-small-custom">
+    <div class="field m-2 is-small-custom">
       <label class="label">Nome da classe</label>
-      <input class="input" type="text" id="display">
+      <input class="input class-name" type="text">
     </div>
     <p id="buttons-container-${index}" class="buttons is-align-content-flex-start">
       <button id="plus-button-${index}" class="button" title="Adicionar classe">
@@ -11,7 +12,7 @@ function addCustomCssClassTemplate(index) {
           <i class="fa fa-plus"></i>
         </span>
       </button>
-      <button id="minus-button-${index}" class="button close-button" title="Deletar classe">
+      <button id="trash-button-${index}" class="button close-button" title="Deletar classe">
         <span class="icon has-text-danger">
         <i class="fa-solid fa-trash"></i>
         </span>
@@ -19,20 +20,20 @@ function addCustomCssClassTemplate(index) {
     </p>
   </div>
   <div class="container is-flex is-flex-direction-row">
-    <div class="custom-variable field m-2">
-      <label class="label">display</label>
+    <div class="field m-2">
+      <label class="label custom-class-attribute">display</label>
       <div class="select">
-        <select>
-          <option>flex</option>
-          <option>block</option>
-          <option>none</option>
+        <select class="custom-class-value">
+          <option value="flex">flex</option>
+          <option value="block">block</option>
+          <option value="none">none</option>
         </select>
       </div>
     </div>
-    <div class="custom-variable field m-2">
-      <label class="label">flex-direction</label>
+    <div class="field m-2">
+      <label class="label custom-class-attribute">flex-direction</label>
       <div class="select">
-        <select>
+        <select class="custom-class-value">
           <option>row</option>
           <option>column</option>
           <option>row-reverse</option>
@@ -40,10 +41,10 @@ function addCustomCssClassTemplate(index) {
         </select>
       </div>
     </div>
-    <div class=" custom-variable field m-2">
-      <label class="label">justify-content</label>
+    <div class="field m-2">
+      <label class="label custom-class-attribute">justify-content</label>
       <div class="select">
-        <select>
+        <select class="custom-class-value">
           <option>center</option>
           <option>start</option>
           <option>space-between</option>
