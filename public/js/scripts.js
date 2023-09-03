@@ -3,21 +3,28 @@ const testCSSCheckBox = document.querySelectorAll('.testarCSS');
 const stylesheetLink = document.getElementById('main-css');
 let downloadButton = document.getElementById('downloadButton');
 let addCssClassesTemplateButtom = document.getElementById('add-custom-class');
+let addClassContainer = document.getElementById('add-class-container');
+const tabs = document.querySelector('ul');
+let index = 0;
 let cssContent = '';
 let addClassTab = '';
+let addNewClass = '';
+let removeNewClass = '';
 
-function openTab(event, tabId) {
+import * as template from './templates.js';
+
+function openTab(tabId) {
   let tabContent = document.querySelectorAll('.tab-content');
   tabContent.forEach(tab => { tab.classList.add('is-hidden'); });
 
   let tabLink = document.querySelectorAll('.tab-link');
   tabLink.forEach(tab => { tab.classList.remove('is-active'); });
 
-  let currentTab = document.getElementById(tabId);
-  console.log(currentTab);
-  currentTab.classList.remove('is-hidden');
-  currentTab.classList.add('display-block');
-  event.currentTarget.classList.add('is-active');
+  let currentTabLink = document.getElementById(tabId);
+  currentTabLink.classList.add('is-active');
+  let currentTabContainer = document.getElementById(tabId + '-container');
+  currentTabContainer.classList.remove('is-hidden');
+  currentTabContainer.classList.add('display-block');
 }
 
 function changePageStyle() {
@@ -41,7 +48,6 @@ function extractFontFamilyFromUrl(url) {
 }
 
 function createSassString() {
-  // let customVariables = document.querySelectorAll('.custom-variable');   
   let bulmaVariables = document.querySelectorAll('.bulma-variable');
   let importUrlString = '';
   let urlFont = '';
@@ -64,15 +70,88 @@ function createSassString() {
   return sassString;
 }
 
-addCssClassesTemplateButtom.addEventListener('click', () => {
-  let addCustomClassesTemplate = document.getElementById('add-class-container');
-  addCustomClassesTemplate.remove();
+function createCustomCss() {
+  let customClass = document.querySelectorAll('.custom-class');
+  let customCssString = '';
+  let customAttributesString = '';
 
-  addClassTab = document.getElementById('add-class');
-  addClassTab.innerHTML = addCustomCssClassTemplate(1);
-});
+  if (customClass) {
+    for (let i = 0; i < customClass.length; i++) {
+      let className = customClass[i].querySelector('.class-name').value;
+      let customAttribute = customClass[i].querySelectorAll('.custom-class-attribute');
+      let attributeValue = customClass[i].querySelectorAll('.custom-class-value');
+
+      for (let j = 0; j < customAttribute.length; j++) {
+        customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value};`;
+      }
+
+      customCssString += `\n.${className} {${customAttributesString}\n}\n`;
+      customAttributesString = '';
+    }
+
+    return customCssString;
+  } else {
+    return false;
+  }
+}
+
+function addCreateNewCustomClass() {
+  let addCustomClassesTemplate = document.getElementById('add-class-content');
+  addCustomClassesTemplate.classList.add('is-hidden');
+
+  addClassTab = document.getElementById('add-class-container');
+  addClassTab.insertAdjacentHTML('beforeend', template.addCustomCssClassTemplate(index));
+  addClassTab.classList.remove('is-hidden');
+  addNewClass = document.getElementById('plus-button-' + index);
+  addNewClass.onclick = () => { addNewClassContainer() };
+
+  removeNewClass = document.getElementById('trash-button-' + index);
+  removeNewClass.onclick = () => { removeAddClassContainer() };
+  index++;
+}
+
+function getElementByMatchedIdNumber(elementId, idPrefix) {
+  let idNumber = elementId.split('-');
+  let element = document.getElementById(idPrefix + idNumber[idNumber.length - 1]);
+
+  return element;
+}
+
+function removeAddClassContainer() {
+  let addCustomClassContainer = getElementByMatchedIdNumber(event.currentTarget.id, 'add-class-container-');
+  let closeButton = document.querySelectorAll('.close-button');
+  let lastCloseButton = closeButton[closeButton.length - 1];
+  let clickedCloseButtonId = event.currentTarget.id;
+
+  addCustomClassContainer.remove();
+
+  if (addClassContainer.childElementCount == 1) {
+    addClassContainer.firstElementChild.classList.remove('is-hidden');
+  } else if (lastCloseButton.id == clickedCloseButtonId) {
+    let newPlusIdNumber = closeButton[closeButton.length - 2].id.split('-');
+    let newPlusButton = template.addPlusButton(newPlusIdNumber[2]);
+    closeButton[closeButton.length - 2].insertAdjacentHTML('beforebegin', newPlusButton);
+    newPlusButton = document.getElementById('plus-button-' + newPlusIdNumber[2]);
+    newPlusButton.onclick = () => { addNewClassContainer() };
+  }
+}
+
+function addNewClassContainer() {
+  let plusClickedButton = document.getElementById(event.currentTarget.id);
+  plusClickedButton.remove();
+  addCreateNewCustomClass();
+}
 
 testCSSCheckBox[1].addEventListener('change', async () => { changePageStyle() });
+
+tabs.addEventListener('click', () => {
+  const tabClicked = event.target.closest('li');
+  openTab(tabClicked.id);
+})
+
+addCssClassesTemplateButtom.addEventListener('click', () => {
+  addCreateNewCustomClass();
+});
 
 compileButton.addEventListener('click', async () => {
   try {
@@ -86,6 +165,9 @@ compileButton.addEventListener('click', async () => {
     });
 
     cssContent = await response.text();
+    let customClassesString = createCustomCss();
+    if (customClassesString) cssContent += `${cssContent} \n${customClassesString}`;
+
     compileButton.classList.remove('is-loading');
     testCSSCheckBox[1].checked = false;
 
@@ -101,63 +183,3 @@ compileButton.addEventListener('click', async () => {
     console.error('Erro ao compilar Sass:', error);
   }
 });
-
-function addCustomCssClassTemplate(a) {
-  let addCssClassesTemplate = `<div id=${a} class="field container is-flex-direction-column">
-<div class="container is-flex-direction-row is-flex is-justify-content-space-between">
-  <div class="custom-variable field m-2 is-small-custom">
-    <label class="label">Nome da classe</label>
-    <input class="input" type="text" id="display">
-  </div>
-  <p class="buttons is-align-content-flex-start">
-    <button id="plus-button" class="button">
-      <span class="icon is-large has-text-info">
-        <i class="fa fa-plus"></i>
-      </span>
-    </button>
-    <button class="button">
-      <span class="icon has-text-danger">
-        <i class="fa-solid fa-x"></i>
-      </span>
-    </button>
-  </p>
-</div>
-<div class="container is-flex is-flex-direction-row">
-  <div class="custom-variable field m-2">
-    <label class="label">display</label>
-    <div class="select">
-      <select>
-        <option>flex</option>
-        <option>block</option>
-        <option>none</option>
-      </select>
-    </div>
-  </div>
-  <div class="custom-variable field m-2">
-    <label class="label">flex-direction</label>
-    <div class="select">
-      <select>
-        <option>row</option>
-        <option>column</option>
-        <option>row-reverse</option>
-        <option>column-reverse</option>
-      </select>
-    </div>
-  </div>
-  <div class=" custom-variable field m-2">
-    <label class="label">justify-content</label>
-    <div class="select">
-      <select>
-        <option>center</option>
-        <option>start</option>
-        <option>space-between</option>
-        <option>space-around</option>
-        <option>space-evenly</option>
-      </select>
-    </div>
-  </div>
-</div>
-<hr class="solid">`;
-
-  return addCssClassesTemplate;
-}
