@@ -82,10 +82,12 @@ function createCustomCss() {
       let attributeValue = customClass[i].querySelectorAll('.custom-class-value');
 
       for (let j = 0; j < customAttribute.length; j++) {
-        customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value};`;
+        if (!attributeValue[j].disabled) {
+          customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value};`;
+        }
       }
 
-      customCssString += `\n.${className} {${customAttributesString}\n}\n`;
+      customCssString += `\n.${className.trim()} {${customAttributesString}\n}\n`;
       customAttributesString = '';
     }
 
@@ -102,12 +104,32 @@ function addCreateNewCustomClass() {
   addClassTab = document.getElementById('add-class-container');
   addClassTab.insertAdjacentHTML('beforeend', template.addCustomCssClassTemplate(index));
   addClassTab.classList.remove('is-hidden');
+  //adicionar event listener aqui
   addNewClass = document.getElementById('plus-button-' + index);
   addNewClass.onclick = () => { addNewClassContainer() };
 
   removeNewClass = document.getElementById('trash-button-' + index);
   removeNewClass.onclick = () => { removeAddClassContainer() };
+
+  let currentAddCustomClassContainer = document.getElementById('add-class-container-' + index);
+  let checkboxes = currentAddCustomClassContainer.querySelectorAll('.add-attribute');
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => { enableCustomAttribute(checkbox) })
+  });
+
   index++;
+}
+
+function enableCustomAttribute(checkbox) {
+  let checkboxForAttribute = checkbox.getAttribute('for');
+  let elementMatched = document.getElementById(checkboxForAttribute);
+
+  if (checkbox.checked) {
+    elementMatched.removeAttribute('disabled');
+  } else {
+    elementMatched.setAttribute('disabled', 'disabled');
+  }
 }
 
 function getElementByMatchedIdNumber(elementId, idPrefix) {
@@ -142,6 +164,45 @@ function addNewClassContainer() {
   addCreateNewCustomClass();
 }
 
+function isThereAnyEmptyClassName() {
+  let emptyClassName = false;
+
+  let classNameInput = document.querySelectorAll('.class-name');
+  classNameInput.forEach(input => {
+    input.nextElementSibling.classList.add('is-hidden');
+    if (input.value.trim() == '') {
+      emptyClassName = true;
+      input.classList.add('is-danger');
+      input.parentElement.lastElementChild.classList.remove('is-hidden');
+    } else {
+      input.classList.remove('is-danger');
+      input.parentElement.lastElementChild.classList.add('is-hidden');
+    }
+  });
+
+  return emptyClassName;
+}
+
+function isClassNameValid() {
+  let classNameRegex = /^[a-zA-Z0-9-_]*$/;
+  let isClassNameValid = true;
+
+  let classNameInput = document.querySelectorAll('.class-name');
+  classNameInput.forEach(input => {
+    input.parentElement.lastElementChild.classList.add('is-hidden');
+    if (input.value.trim().match(classNameRegex)) {
+      input.classList.remove('is-danger');
+      input.nextElementSibling.classList.add('is-hidden');
+    } else {
+      isClassNameValid = false;
+      input.classList.add('is-danger');
+      input.nextElementSibling.classList.remove('is-hidden');
+    }
+  });
+
+  return isClassNameValid;
+}
+
 testCSSCheckBox[1].addEventListener('change', async () => { changePageStyle() });
 
 tabs.addEventListener('click', () => {
@@ -154,32 +215,34 @@ addCssClassesTemplateButtom.addEventListener('click', () => {
 });
 
 compileButton.addEventListener('click', async () => {
-  try {
-    compileButton.classList.add('is-loading');
-    let sassString = createSassString();
-
-    const response = await fetch('/compile-sass', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sassString })
-    });
-
-    cssContent = await response.text();
-    let customClassesString = createCustomCss();
-    if (customClassesString) cssContent += `${cssContent} \n${customClassesString}`;
-
-    compileButton.classList.remove('is-loading');
-    testCSSCheckBox[1].checked = false;
-
-    const blob = new Blob([cssContent], { type: 'text/css' });
-    const url = URL.createObjectURL(blob);
-
-    downloadButton.href = url;
-    downloadButton.download = 'compiled.css';
-
-    ['disabled', 'title'].forEach(attribute => downloadButton.removeAttribute(attribute));
-    testCSSCheckBox.forEach(item => { item.removeAttribute('disabled') });
-  } catch (error) {
-    console.error('Erro ao compilar Sass:', error);
+  if (!isThereAnyEmptyClassName() && isClassNameValid()) {
+    try {
+      compileButton.classList.add('is-loading');
+      let sassString = createSassString();
+  
+      const response = await fetch('/compile-sass', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sassString })
+      });
+  
+      cssContent = await response.text();
+      let customClassesString = createCustomCss();
+      if (customClassesString) cssContent += `${cssContent} \n${customClassesString}`;
+  
+      compileButton.classList.remove('is-loading');
+      testCSSCheckBox[1].checked = false;
+  
+      const blob = new Blob([cssContent], { type: 'text/css' });
+      const url = URL.createObjectURL(blob);
+  
+      downloadButton.href = url;
+      downloadButton.download = 'compiled.css';
+  
+      ['disabled', 'title'].forEach(attribute => downloadButton.removeAttribute(attribute));
+      testCSSCheckBox.forEach(item => { item.removeAttribute('disabled') });
+    } catch (error) {
+      console.error('Erro ao compilar Sass:', error);
+    }  
   }
 });
