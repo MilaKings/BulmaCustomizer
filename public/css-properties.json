@@ -1,0 +1,410 @@
+{
+  "css-properties": [
+    {
+      "name": "color",
+      "type": "color",
+      "subtype": "font"
+    },
+    {
+      "name": "font-family",
+      "type": "font",
+      "subtype": "font-family"
+    },
+    {
+      "name": "font-size",
+      "type": "number",
+      "subtype": "font"
+    },
+    {
+      "name": "border-width",
+      "type": "number",
+      "subtype": "border"
+    },
+    {
+      "name": "border-style",
+      "type": "drop-down",
+      "values": [
+        "none",
+        "solid",
+        "dotted",
+        "dashed",
+        "double",
+        "groove",
+        "ridge",
+        "inset",
+        "outset",
+        "hidden"
+      ],
+      "subtype": "border"
+    },
+    {
+      "name": "background-color",
+      "type": "color",
+      "subtype": "background"
+    },
+    {
+      "name": "margin",
+      "type": "number",
+      "unity": "%"
+    },
+    {
+      "name": "padding",
+      "type": "number",
+      "unity": "%"
+    },
+    {
+      "name": "width",
+      "type": "number",
+      "unity": "%"
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "unity": "%"
+    },
+    {
+      "name": "text-align",
+      "type": "drop-down",
+      "values": [
+        "left",
+        "right",
+        "center",
+        "justify"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "display",
+      "type": "drop-down",
+      "values": [
+        "block",
+        "inline",
+        "inline-block",
+        "flex",
+        "grid",
+        "table",
+        "none"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "position",
+      "type": "drop-down",
+      "values": [
+        "static",
+        "relative",
+        "absolute",
+        "fixed",
+        "sticky"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "float",
+      "type": "drop-down",
+      "values": [
+        "left",
+        "right",
+        "none"
+      ]
+    },
+    {
+      "name": "overflow",
+      "type": "drop-down",
+      "values": [
+        "visible",
+        "hidden",
+        "scroll",
+        "auto"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "text-transform",
+      "type": "drop-down",
+      "values": [
+        "uppercase",
+        "lowercase",
+        "capitalize",
+        "none",
+        "full-width",
+        "inherit",
+        "initial",
+        "unset"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "text-decoration",
+      "type": "drop-down",
+      "values": [
+        "none",
+        "underline",
+        "overline",
+        "line-through",
+        "blink"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "line-height",
+      "type": "number",
+      "unity": "%"
+    },
+    {
+      "name": "flex-direction",
+      "type": "drop-down",
+      "values": [
+        "row",
+        "row-reverse",
+        "column",
+        "column-reverse"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "justify-content",
+      "type": "drop-down",
+      "values": [
+        "flex-start",
+        "flex-end",
+        "center",
+        "space-between",
+        "space-around"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "align-items",
+      "type": "drop-down",
+      "values": [
+        "stretch",
+        "flex-start",
+        "flex-end",
+        "center",
+        "baseline",
+        "start",
+        "end"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "align-self",
+      "type": "drop-down",
+      "values": [
+        "auto",
+        "stretch",
+        "flex-start",
+        "flex-end",
+        "center",
+        "baseline"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
+    },
+    {
+      "name": "background-repeat",
+      "type": "drop-down",
+      "values": [
+        "repeat",
+        "repeat-x",
+        "repeat-y",
+        "no-repeat",
+        "space",
+        "no-repeat"
+      ],
+      "subtype": "background"
+    },
+    {
+      "name": "background-size",
+      "type": "drop-down",
+      "values": [
+        "valor",
+        "auto",
+        "cover",
+        "contain"
+      ],
+      "subtype": "background"
+    },
+    {
+      "name": "opacity",
+      "type": "number"
+    },
+    {
+      "name": "z-index",
+      "type": "number"
+    },
+    {
+      "name": "border-radius",
+      "type": "number",
+      "subtype": "border",
+      "unity": "%"
+    },
+    {
+      "name": "font-weight",
+      "type": "drop-down",
+      "values": [
+        "normal",
+        "bold",
+        "bolder",
+        "lighter"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "letter-spacing",
+      "type": "number",
+      "unity": "em",
+      "subtype": "font"
+    },
+    {
+      "name": "word-spacing",
+      "type": "number",
+      "unity": "em",
+      "subtype": "font"
+    },
+    {
+      "name": "white-space",
+      "type": "drop-down",
+      "values": [
+        "normal",
+        "nowrap",
+        "pre",
+        "pre-line",
+        "pre-wrap",
+        "break-spaces"
+      ]
+    },
+    {
+      "name": "text-overflow",
+      "type": "drop-down",
+      "values": [
+        "clip",
+        "ellipsis"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "vertical-align",
+      "type": "drop-down",
+      "values": [
+        "baseline",
+        "sub",
+        "super",
+        "text-top",
+        "text-bottom",
+        "middle",
+        "top",
+        "bottom"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "outline-color",
+      "type": "color",
+      "subtype": "outline"
+    },
+    {
+      "name": "outline-width",
+      "type": "number",
+      "subtype": "outline"
+    },
+    {
+      "name": "outline-style",
+      "type": "drop-down",
+      "values": [
+        "none",
+        "hidden",
+        "dotted",
+        "dashed",
+        "solid",
+        "double",
+        "groove",
+        "ridge",
+        "inset",
+        "outset"
+      ],
+      "subtype": "outline"
+    },
+    {
+      "name": "overflow-wrap",
+      "type": "drop-down",
+      "values": [
+        "normal",
+        "break-word",
+        "anywhere"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "letter-spacing",
+      "type": "number",
+      "unity": "em",
+      "subtype": "font"
+    },
+    {
+      "name": "flex-wrap",
+      "type": "drop-down",
+      "values": [
+        "nowrap",
+        "wrap",
+        "wrap-reverse"
+      ],
+      "subtype": "flex"
+    },
+    {
+      "name": "object-fit",
+      "type": "drop-down",
+      "values": [
+        "fill",
+        "contain",
+        "cover",
+        "none",
+        "scale-down"
+      ]
+    },
+    {
+      "name": "cursor",
+      "type": "drop-down",
+      "values": [
+        "auto",
+        "default",
+        "none",
+        "help",
+        "progress",
+        "pointer",
+        "text",
+        "wait",
+        "move",
+        "crosshair",
+        "not-allowed",
+        "cell",
+        "vertical-text",
+        "alias",
+        "no-drop",
+        "grab",
+        "grabbing",
+        "all-scroll",
+        "col-resize",
+        "row-resize",
+        "n-resize",
+        "e-resize",
+        "s-resize",
+        "w-resize",
+        "ne-resize",
+        "nw-resize",
+        "se-resize",
+        "ew-resize",
+        "ns-resize",
+        "nesw-resize",
+        "nwse-resize",
+        "zoom-in",
+        "zoom-out"
+      ]
+    }
+  ]
+}

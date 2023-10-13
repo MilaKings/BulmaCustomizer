@@ -1,0 +1,29 @@
+{
+  "css-properties": [
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
+    }
+  ]
+}

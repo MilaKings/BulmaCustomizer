@@ -1,6 +1,6 @@
 const express = require('express');
 const sassController = require('./controllers/sassController');
-const fs = require('fs');
+// const fs = require('fs');
 const router = express.Router();
 
 router.get('/', (req, res) => { res.render('index') });

@@ -13,6 +13,10 @@ let removeNewClass = '';
 
 import * as template from './templates.js';
 
+
+// import cssProperties from "../css-properties.json" assert { type: 'json' };
+// console.log(cssProperties);
+
 function openTab(tabId) {
   let tabContent = document.querySelectorAll('.tab-content');
   tabContent.forEach(tab => { tab.classList.add('is-hidden'); });
