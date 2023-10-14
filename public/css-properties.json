@@ -6,19 +6,31 @@
       "subtype": "font"
     },
     {
-      "name": "font-family",
-      "type": "font",
-      "subtype": "font-family"
+      "name": "background-color",
+      "type": "color",
+      "subtype": "background"
+    },
+    {
+      "name": "outline-color",
+      "type": "color",
+      "subtype": "outline"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
     },
     {
       "name": "font-size",
       "type": "number",
-      "subtype": "font"
+      "subtype": "font",
+      "unity": "%"
     },
     {
       "name": "border-width",
       "type": "number",
-      "subtype": "border"
+      "subtype": "border",
+      "unity": "%"
     },
     {
       "name": "border-style",
@@ -36,11 +48,6 @@
         "hidden"
       ],
       "subtype": "border"
-    },
-    {
-      "name": "background-color",
-      "type": "color",
-      "subtype": "background"
     },
     {
       "name": "margin",
@@ -202,11 +209,6 @@
       "subtype": "flex"
     },
     {
-      "name": "background-image",
-      "type": "image",
-      "subtype": "background"
-    },
-    {
       "name": "background-repeat",
       "type": "drop-down",
       "values": [
@@ -304,14 +306,10 @@
       "subtype": "flex"
     },
     {
-      "name": "outline-color",
-      "type": "color",
-      "subtype": "outline"
-    },
-    {
       "name": "outline-width",
       "type": "number",
-      "subtype": "outline"
+      "subtype": "outline",
+      "unity": "%"
     },
     {
       "name": "outline-style",

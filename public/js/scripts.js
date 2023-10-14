@@ -82,8 +82,12 @@ function createCustomCss() {
       let attributeValue = customClass[i].querySelectorAll('.custom-class-value');
 
       for (let j = 0; j < customAttribute.length; j++) {
-        if (!attributeValue[j].disabled) {
-          customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value};`;
+        if (!attributeValue[j].disabled && attributeValue[j].value) {
+          if (attributeValue[j].classList.contains('file-input')) {
+            customAttributesString += `\n${customAttribute[j].textContent}: url('${attributeValue[j].value}');`;
+          } else {
+            customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value}${attributeValue[j].classList.contains('has-unity') ? '%' : ''};`;
+          }
         }
       }
 
