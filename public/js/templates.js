@@ -3,8 +3,8 @@ import json from "../css-properties2.json" assert { type: 'json' };
 function generateFormElements(jsonData) {
   const formElements = [];
   let formElement = '';
-  formElement += `<div class="container is-flex is-flex-direction-row is-flex-wrap-wrap">\n`;
   
+  formElements.push(`<div class="container is-flex is-flex-direction-row is-flex-wrap-wrap">\n`);
   for (const property of jsonData['css-properties']) {
     if (property.type != 'color') {
       formElement += `<div class="field m-2 is-flex is-flex-direction-column ${(property.type === 'image') ? 'max-label-image-size' : 'max-label-size'}">
@@ -19,7 +19,7 @@ function generateFormElements(jsonData) {
         <strong class="is-size-6 custom-class-attribute">${property.name}</strong>
         <div class="cp_wrapper">
           <input class="input custom-class-value" type="color" id="${property.name}-000" name="color" value="" disabled>
-        </div>`;
+          </div>`;
     } else if (property.type === 'number') {
       formElement += `<div class="field">
       <input class="input input-number-size custom-class-value" type="number" name="${property.name}" placeholder="in %" disabled>`;
@@ -31,25 +31,20 @@ function generateFormElements(jsonData) {
     } else if (property.type === 'image') {
       formElement += `<div class="file is-small has-name">
       <label class="file-label">
-        <input class="file-input" type="file" name="resume">
+        <input class="file-input custom-class-value" type="file" id="${property.name}-000" accept="image/*" disabled>
         <span class="file-cta">
           <span class="file-icon">
             <i class="fas fa-upload"></i>
           </span>
-          <span class="file-label">
-            Small file…
-          </span>
+          <span class="file-label">Escolher</span>
         </span>
-        <span class="file-name">
-          Screen Shot 2017-07-29 at 15.54.25.png
-        </span>
-      </label>
-    </div>`;
-    } else {
-      formElement += `<input type="text" name="${property.name}" placeholder="${property.name}">`;
-    }
+        <span class="file-name"></span>
+      </label>`;
+    } //else {
+     // formElement += `<input type="text" name="${property.name}" placeholder="${property.name}">`;
+   // }
 
-    // formElement += `</div>
+    formElement += `</div>`;
     formElement += `
     <label class="checkbox">
       <input type="checkbox" class="add-attribute" for="${property.name}-000"> Adicionar

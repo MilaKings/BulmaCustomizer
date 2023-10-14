@@ -13,10 +13,6 @@ let removeNewClass = '';
 
 import * as template from './templates.js';
 
-
-// import cssProperties from "../css-properties.json" assert { type: 'json' };
-// console.log(cssProperties);
-
 function openTab(tabId) {
   let tabContent = document.querySelectorAll('.tab-content');
   tabContent.forEach(tab => { tab.classList.add('is-hidden'); });
@@ -122,7 +118,24 @@ function addCreateNewCustomClass() {
     checkbox.addEventListener('change', () => { enableCustomAttribute(checkbox) })
   });
 
+  setInputImageFileName();
+
   index++;
+}
+
+function setInputImageFileName() {
+  const fileInput = document.querySelectorAll('.file-input');
+  
+  fileInput.forEach(file => {
+    file.onchange = () => {
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (validImageTypes.includes(file.files[0].type)) {
+        file.nextElementSibling.nextElementSibling.textContent = file.files[0].name;
+      } else {
+        file.files[0].value = ''; 
+      }
+    }
+  });
 }
 
 function enableCustomAttribute(checkbox) {
