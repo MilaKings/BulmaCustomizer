@@ -1,6 +1,27 @@
 
+select {
+  width: 100%;
+}
+
 .is-small-custom {
   width: 30%;
+}
+
+.max-label-size {
+  width: 15%;
+}
+
+.max-label-color-size {
+  align-items: flex-start;
+  width: 19%;
+}
+
+.max-label-image-size {
+  width: 32%;
+}
+
+.input-number-size {
+  width: 55%;
 }
 
 input[type="color"] {
