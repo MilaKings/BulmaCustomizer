@@ -1,599 +1,470 @@
 {
-  "variables": {
-    "$primary": {
+  "variables": [
+    {
+      "name": "$primary",
       "type": "variable",
       "value": "$turquoise",
-      "computedValue": "hsl(171, 100%, 41%)",
+      "computedValue": "#00d1b2",
       "computedType": "color"
     },
-    "$info": {
+    {
+      "name": "$info",
       "type": "variable",
       "value": "$cyan",
-      "computedValue": "hsl(207, 61%, 53%)",
+      "computedValue": "#3e8ed0",
       "computedType": "color"
     },
-    "$success": {
+    {
+      "name": "$success",
       "type": "variable",
       "value": "$green",
-      "computedValue": "hsl(153, 53%, 53%)",
+      "computedValue": "#48c78e",
       "computedType": "color"
     },
-    "$warning": {
+    {
+      "name": "$warning",
       "type": "variable",
       "value": "$yellow",
-      "computedValue": "hsl(44, 100%, 77%)",
+      "computedValue": "#ffe08a",
       "computedType": "color"
     },
-    "$danger": {
+    {
+      "name": "$danger",
       "type": "variable",
       "value": "$red",
-      "computedValue": "hsl(348, 86%, 61%)",
+      "computedValue": "#f14668",
       "computedType": "color"
     },
-    "$light": {
+    {
+      "name": "$light",
       "type": "variable",
       "value": "$white-ter",
-      "computedValue": "hsl(0, 0%, 96%)",
+      "computedValue": "#f5f5f5",
       "computedType": "color"
     },
-    "$dark": {
+    {
+      "name": "$dark",
       "type": "variable",
       "value": "$grey-darker",
-      "computedValue": "hsl(0, 0%, 21%)",
+      "computedValue": "#363636",
       "computedType": "color"
     },
-    "$orange-invert": {
-      "type": "function",
-      "value": "findColorInvert($orange)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$yellow-invert": {
-      "type": "function",
-      "value": "findColorInvert($yellow)",
-      "computedValue": "rgba(0, 0, 0, 0.7)",
-      "computedType": "color"
-    },
-    "$green-invert": {
-      "type": "function",
-      "value": "findColorInvert($green)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$turquoise-invert": {
-      "type": "function",
-      "value": "findColorInvert($turquoise)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$cyan-invert": {
-      "type": "function",
-      "value": "findColorInvert($cyan)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$blue-invert": {
-      "type": "function",
-      "value": "findColorInvert($blue)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$purple-invert": {
-      "type": "function",
-      "value": "findColorInvert($purple)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$red-invert": {
-      "type": "function",
-      "value": "findColorInvert($red)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$primary-invert": {
-      "type": "function",
-      "value": "findColorInvert($primary)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$primary-light": {
+    {
+      "name": "$primary-light",
       "type": "compound",
       "value": "findLightColor($primary)"
     },
-    "$primary-dark": {
+    {
+      "name": "$primary-dark",
       "type": "compound",
       "value": "findDarkColor($primary)"
     },
-    "$info-invert": {
-      "type": "function",
-      "value": "findColorInvert($info)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$info-light": {
+    {
+      "name": "$info-light",
       "type": "compound",
       "value": "findLightColor($info)"
     },
-    "$info-dark": {
+    {
+      "name": "$info-dark",
       "type": "compound",
       "value": "findDarkColor($info)"
     },
-    "$success-invert": {
-      "type": "function",
-      "value": "findColorInvert($success)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$success-light": {
+    {
+      "name": "$success-light",
       "type": "compound",
       "value": "findLightColor($success)"
     },
-    "$success-dark": {
+    {
+      "name": "$success-dark",
       "type": "compound",
       "value": "findDarkColor($success)"
     },
-    "$warning-invert": {
-      "type": "function",
-      "value": "findColorInvert($warning)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$warning-light": {
+    {
+      "name": "$warning-light",
       "type": "compound",
       "value": "findLightColor($warning)"
     },
-    "$warning-dark": {
+    {
+      "name": "$warning-dark",
       "type": "compound",
       "value": "findDarkColor($warning)"
     },
-    "$danger-invert": {
-      "type": "function",
-      "value": "findColorInvert($danger)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$danger-light": {
+    {
+      "name": "$danger-light",
       "type": "compound",
       "value": "findLightColor($danger)"
     },
-    "$danger-dark": {
+    {
+      "name": "$danger-dark",
       "type": "compound",
       "value": "findDarkColor($danger)"
     },
-    "$light-invert": {
-      "type": "function",
-      "value": "findColorInvert($light)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$dark-invert": {
-      "type": "function",
-      "value": "findColorInvert($dark)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$scheme-main": {
+    {
+      "name": "$scheme-main",
       "type": "variable",
       "value": "$white",
-      "computedValue": "hsl(0, 0%, 100%)",
+      "computedValue": "#ffffff",
       "computedType": "color"
     },
-    "$scheme-main-bis": {
+    {
+      "name": "$scheme-main-bis",
       "type": "variable",
       "value": "$white-bis",
-      "computedValue": "hsl(0, 0%, 98%)",
+      "computedValue": "#fafafa",
       "computedType": "color"
     },
-    "$scheme-main-ter": {
+    {
+      "name": "$scheme-main-ter",
       "type": "variable",
       "value": "$white-ter",
-      "computedValue": "hsl(0, 0%, 96%)",
+      "computedValue": "#f5f5f5",
       "computedType": "color"
     },
-    "$scheme-invert": {
-      "type": "variable",
-      "value": "$black",
-      "computedValue": "hsl(0, 0%, 4%)",
-      "computedType": "color"
-    },
-    "$scheme-invert-bis": {
-      "type": "variable",
-      "value": "$black-bis",
-      "computedValue": "hsl(0, 0%, 7%)",
-      "computedType": "color"
-    },
-    "$scheme-invert-ter": {
-      "type": "variable",
-      "value": "$black-ter",
-      "computedValue": "hsl(0, 0%, 14%)",
-      "computedType": "color"
-    },
-    "$background": {
+    {
+      "name": "$background",
       "type": "variable",
       "value": "$white-ter",
-      "computedValue": "hsl(0, 0%, 96%)",
+      "computedValue": "#f5f5f5",
       "computedType": "color"
     },
-    "$border": {
+    {
+      "name": "$border",
       "type": "variable",
       "value": "$grey-lighter",
-      "computedValue": "hsl(0, 0%, 86%)",
+      "computedValue": "#dbdbdb",
       "computedType": "color"
     },
-    "$border-hover": {
+    {
+      "name": "$border-hover",
       "type": "variable",
       "value": "$grey-light",
-      "computedValue": "hsl(0, 0%, 71%)",
+      "computedValue": "#b5b5b5",
       "computedType": "color"
     },
-    "$border-light": {
+    {
+      "name": "$border-light",
       "type": "variable",
       "value": "$grey-lightest",
-      "computedValue": "hsl(0, 0%, 93%)",
+      "computedValue": "#ededed",
       "computedType": "color"
     },
-    "$border-light-hover": {
+    {
+      "name": "$border-light-hover",
       "type": "variable",
       "value": "$grey-light",
-      "computedValue": "hsl(0, 0%, 71%)",
+      "computedValue": "#b5b5b5",
       "computedType": "color"
     },
-    "$text": {
+    {
+      "name": "$text",
       "type": "variable",
       "value": "$grey-dark",
-      "computedValue": "hsl(0, 0%, 29%)",
+      "computedValue": "#4a4a4a",
       "computedType": "color"
     },
-    "$text-invert": {
-      "type": "function",
-      "value": "findColorInvert($text)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$text-light": {
+    {
+      "name": "$text-light",
       "type": "variable",
       "value": "$grey",
-      "computedValue": "hsl(0, 0%, 48%)",
+      "computedValue": "#7a7a7a",
       "computedType": "color"
     },
-    "$text-strong": {
+    {
+      "name": "$text-strong",
       "type": "variable",
       "value": "$grey-darker",
-      "computedValue": "hsl(0, 0%, 21%)",
+      "computedValue": "#363636",
       "computedType": "color"
     },
-    "$code": {
+    {
+      "name": "$code",
       "type": "compound",
       "value": "darken($red, 15%)"
     },
-    "$code-background": {
+    {
+      "name": "$code-background",
       "type": "variable",
       "value": "$background",
-      "computedValue": "hsl(0, 0%, 96%)",
+      "computedValue": "#f5f5f5",
       "computedType": "color"
     },
-    "$pre": {
+    {
+      "name": "$pre",
       "type": "variable",
       "value": "$text",
-      "computedValue": "hsl(0, 0%, 29%)",
+      "computedValue": "#4a4a4a",
       "computedType": "color"
     },
-    "$pre-background": {
+    {
+      "name": "$pre-background",
       "type": "variable",
       "value": "$background",
-      "computedValue": "hsl(0, 0%, 96%)",
+      "computedValue": "#f5f5f5",
       "computedType": "color"
     },
-    "$link": {
+    {
+      "name": "$link",
       "type": "variable",
       "value": "$blue",
-      "computedValue": "hsl(229, 53%, 53%)",
+      "computedValue": "#485fc7",
       "computedType": "color"
     },
-    "$link-invert": {
-      "type": "function",
-      "value": "findColorInvert($link)",
-      "computedValue": "#fff",
-      "computedType": "color"
-    },
-    "$link-light": {
+    {
+      "name": "$link-light",
       "type": "compound",
       "value": "findLightColor($link)"
     },
-    "$link-dark": {
+    {
+      "name": "$link-dark",
       "type": "compound",
       "value": "findDarkColor($link)"
     },
-    "$link-visited": {
+    {
+      "name": "$link-visited",
       "type": "variable",
       "value": "$purple",
-      "computedValue": "hsl(271, 100%, 71%)",
+      "computedValue": "#b86bff",
       "computedType": "color"
     },
-    "$link-hover": {
+    {
+      "name": "$link-hover",
       "type": "variable",
       "value": "$grey-darker",
-      "computedValue": "hsl(0, 0%, 21%)",
+      "computedValue": "#363636",
       "computedType": "color"
     },
-    "$link-hover-border": {
+    {
+      "name": "$link-hover-border",
       "type": "variable",
       "value": "$grey-light",
-      "computedValue": "hsl(0, 0%, 71%)",
+      "computedValue": "#b5b5b5",
       "computedType": "color"
     },
-    "$link-focus": {
+    {
+      "name": "$link-focus",
       "type": "variable",
       "value": "$grey-darker",
-      "computedValue": "hsl(0, 0%, 21%)",
+      "computedValue": "#363636",
       "computedType": "color"
     },
-    "$link-focus-border": {
+    {
+      "name": "$link-focus-border",
       "type": "variable",
       "value": "$blue",
-      "computedValue": "hsl(229, 53%, 53%)",
+      "computedValue": "#485fc7",
       "computedType": "color"
     },
-    "$link-active": {
+    {
+      "name": "$link-active",
       "type": "variable",
       "value": "$grey-darker",
-      "computedValue": "hsl(0, 0%, 21%)",
+      "computedValue": "#485fc7",
       "computedType": "color"
     },
-    "$link-active-border": {
+    {
+      "name": "$link-active-border",
       "type": "variable",
       "value": "$grey-dark",
-      "computedValue": "hsl(0, 0%, 29%)",
+      "computedValue": "#4a4a4a",
       "computedType": "color"
     },
-    "$family-primary": {
+    {
+      "name": "$family-primary",
       "type": "variable",
       "value": "$family-sans-serif",
-      "computedValue": "BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+      "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
       "computedType": "font-family"
     },
-    "$family-secondary": {
+    {
+      "name": "$family-secondary",
       "type": "variable",
       "value": "$family-sans-serif",
-      "computedValue": "BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+      "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
       "computedType": "font-family"
     },
-    "$family-code": {
+    {
+      "name": "$family-code",
       "type": "variable",
       "value": "$family-monospace",
-      "computedValue": "monospace",
       "computedType": "font-family"
     },
-    "$size-small": {
+    {
+      "name": "$size-small",
       "type": "variable",
       "value": "$size-7",
       "computedValue": "0.75rem",
       "computedType": "size"
     },
-    "$size-normal": {
+    {
+      "name": "$size-normal",
       "type": "variable",
       "value": "$size-6",
       "computedValue": "1rem",
       "computedType": "size"
     },
-    "$size-medium": {
+    {
+      "name": "$size-medium",
       "type": "variable",
       "value": "$size-5",
       "computedValue": "1.25rem",
       "computedType": "size"
     },
-    "$size-large": {
+    {
+      "name": "$size-large",
       "type": "variable",
       "value": "$size-4",
       "computedValue": "1.5rem",
       "computedType": "size"
     },
-    "$shadow": {
-      "type": "shadow",
-      "value": "0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02)"
-    },
-    "$custom-colors": {
+    {
+      "name": "$custom-colors",
       "type": "keyword",
-      "value": "null"
+      "value": null
     },
-    "$custom-shades": {
+    {
+      "name": "$custom-shades",
       "type": "keyword",
-      "value": "null"
+      "value": null
     },
-    "$colors": {
+    {
+      "name": "$sizes",
       "type": "map",
-      "value": {
-        "white": {
-          "variable": "$white",
-          "invert": "$black"
-        },
-        "black": {
-          "variable": "$black",
-          "invert": "$white"
-        },
-        "light": {
-          "variable": "$light",
-          "invert": "$light-invert"
-        },
-        "dark": {
-          "variable": "$dark",
-          "invert": "$dark-invert"
-        },
-        "primary": {
-          "variable": "$primary",
-          "invert": "$primary-invert",
-          "light": "$primary-light",
-          "dark": "$primary-dark"
-        },
-        "link": {
-          "variable": "$link",
-          "invert": "$link-invert",
-          "light": "$link-light",
-          "dark": "$link-dark"
-        },
-        "info": {
-          "variable": "$info",
-          "invert": "$info-invert",
-          "light": "$info-light",
-          "dark": "$info-dark"
-        },
-        "success": {
-          "variable": "$success",
-          "invert": "$success-invert",
-          "light": "$success-light",
-          "dark": "$success-dark"
-        },
-        "warning": {
-          "variable": "$warning",
-          "invert": "$warning-invert",
-          "light": "$warning-light",
-          "dark": "$warning-dark"
-        },
-        "danger": {
-          "variable": "$danger",
-          "invert": "$danger-invert",
-          "light": "$danger-light",
-          "dark": "$danger-dark"
-        }
-      }
+      "value": "$size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7"
     },
-    "$shades": {
-      "type": "map",
-      "value": {
-        "black-bis": "$black-bis",
-        "black-ter": "$black-ter",
-        "grey-darker": "$grey-darker",
-        "grey-dark": "$grey-dark",
-        "grey": "$grey",
-        "grey-light": "$grey-light",
-        "grey-lighter": "$grey-lighter",
-        "white-ter": "$white-ter",
-        "white-bis": "$white-bis"
-      }
-    },
-    "$sizes": {
-      "type": "map",
-      "value": {
-        "$size-1": "$size-1",
-        "$size-2": "$size-2",
-        "$size-3": "$size-3",
-        "$size-4": "$size-4",
-        "$size-5": "$size-5",
-        "$size-6": "$size-6",
-        "$size-7": "$size-7"
-      }
-    },
-    "$body-background-color": {
+    {
+      "name": "$body-background-color",
       "type": "variable",
       "value": "$scheme-main",
-      "computedValue": "hsl(0, 0%, 100%)",
+      "computedValue": "#ffffff",
       "computedType": "color"
     },
-    "$body-size": {
+    {
+      "name": "$body-size",
       "type": "size",
       "value": "16px"
     },
-    "$body-min-width": {
+    {
+      "name": "$body-min-width",
       "type": "size",
       "value": "300px"
     },
-    "$body-rendering": {
+    {
+      "name": "$body-rendering",
       "type": "keyword",
       "value": "optimizeLegibility"
     },
-    "$body-family": {
+    {
+      "name": "$body-family",
       "type": "variable",
       "value": "$family-primary",
-      "computedValue": "BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+      "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
       "computedType": "font-family"
     },
-    "$body-overflow-x": {
+    {
+      "name": "$body-overflow-x",
       "type": "string",
       "value": "hidden"
     },
-    "$body-overflow-y": {
+    {
+      "name": "$body-overflow-y",
       "type": "string",
       "value": "scroll"
     },
-    "$body-color": {
+    {
+      "name": "$body-color",
       "type": "variable",
       "value": "$text",
-      "computedValue": "hsl(0, 0%, 29%)",
+      "computedValue": "#4a4a4a",
       "computedType": "color"
     },
-    "$body-font-size": {
+    {
+      "name": "$body-font-size",
       "type": "size",
       "value": "1em"
     },
-    "$body-weight": {
+    {
+      "name": "$body-weight",
       "type": "variable",
       "value": "$weight-normal",
       "computedValue": "400",
       "computedType": "font-weight"
     },
-    "$body-line-height": {
+    {
+      "name": "$body-line-height",
       "type": "unitless",
       "value": "1.5"
     },
-    "$code-family": {
+    {
+      "name": "$code-family",
       "type": "variable",
       "value": "$family-code",
-      "computedValue": "monospace",
       "computedType": "font-family"
     },
-    "$code-padding": {
+    {
+      "name": "$code-padding",
       "type": "size",
       "value": "0.25em 0.5em 0.25em"
     },
-    "$code-weight": {
+    {
+      "name": "$code-weight",
       "type": "font-weight",
       "value": "normal"
     },
-    "$code-size": {
+    {
+      "name": "$code-size",
       "type": "size",
       "value": "0.875em"
     },
-    "$small-font-size": {
+    {
+      "name": "$small-font-size",
       "type": "size",
       "value": "0.875em"
     },
-    "$hr-background-color": {
+    {
+      "name": "$hr-background-color",
       "type": "variable",
       "value": "$background",
-      "computedValue": "hsl(0, 0%, 96%)",
+      "computedValue": "#f5f5f5",
       "computedType": "color"
     },
-    "$hr-height": {
+    {
+      "name": "$hr-height",
       "type": "size",
       "value": "2px"
     },
-    "$hr-margin": {
+    {
+      "name": "$hr-margin",
       "type": "size",
       "value": "1.5rem 0"
     },
-    "$strong-color": {
+    {
+      "name": "$strong-color",
       "type": "variable",
       "value": "$text-strong",
-      "computedValue": "hsl(0, 0%, 21%)",
+      "computedValue": "#363636",
       "computedType": "color"
     },
-    "$strong-weight": {
+    {
+      "name": "$strong-weight",
       "type": "variable",
       "value": "$weight-bold",
       "computedValue": "700",
       "computedType": "font-weight"
     },
-    "$pre-font-size": {
+    {
+      "name": "$pre-font-size",
       "type": "size",
       "value": "0.875em"
     },
-    "$pre-padding": {
+    {
+      "name": "$pre-padding",
       "type": "size",
       "value": "1.25rem 1.5rem"
     },
-    "$pre-code-font-size": {
+    {
+      "name": "$pre-code-font-size",
       "type": "size",
       "value": "1em"
     }
-  }
+  ]
 }

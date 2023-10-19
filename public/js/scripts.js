@@ -1,10 +1,11 @@
 const compileButton = document.getElementById('compileButton');
 const testCSSCheckBox = document.querySelectorAll('.testarCSS');
 const stylesheetLink = document.getElementById('main-css');
+const tabs = document.querySelector('ul');
 let downloadButton = document.getElementById('downloadButton');
 let addCssClassesTemplateButtom = document.getElementById('add-custom-class');
 let addClassContainer = document.getElementById('add-class-container');
-const tabs = document.querySelector('ul');
+let customBulmaVariableContainer = document.getElementById('customize-variables-container');
 let index = 0;
 let cssContent = '';
 let addClassTab = '';
@@ -108,7 +109,7 @@ function addCreateNewCustomClass() {
   addClassTab = document.getElementById('add-class-container');
   addClassTab.insertAdjacentHTML('beforeend', template.addCustomCssClassTemplate(index));
   addClassTab.classList.remove('is-hidden');
-  //adicionar event listener aqui
+
   addNewClass = document.getElementById('plus-button-' + index);
   addNewClass.onclick = () => { addNewClassContainer() };
 
@@ -234,6 +235,8 @@ tabs.addEventListener('click', () => {
 addCssClassesTemplateButtom.addEventListener('click', () => {
   addCreateNewCustomClass();
 });
+
+customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.createBulmaAttributes());
 
 compileButton.addEventListener('click', async () => {
   if (!isThereAnyEmptyClassName() && isClassNameValid()) {

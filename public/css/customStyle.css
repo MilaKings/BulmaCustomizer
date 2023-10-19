@@ -3,6 +3,10 @@ select {
   width: 100%;
 }
 
+.bulma-color-variable {
+  width: 19%;
+}
+
 .is-small-custom {
   width: 30%;
 }

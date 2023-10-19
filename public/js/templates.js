@@ -1,4 +1,36 @@
-import json from "../css-properties.json" assert { type: 'json' };
+import cssProperties from "../css-properties.json" assert { type: 'json' };
+import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
+
+// {/* <div class="control m-2 is-flex is-flex-direction-row level-item">
+// <strong class="is-size-6">@import url</strong>
+// <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="@import url"
+// value="https://fonts.googleapis.com/css?family=Tangerine">
+// </div> */}
+
+  function createBulmaAttributes() {
+  const formElements = [];
+  let formElement = '';
+  
+  formElements.push(`<div class="field is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap">\n`);
+
+  for (const property of bulmaVariables['variables']) {
+    if (property.computedType == 'color') {
+      formElement += `<div class="control m-2 is-flex is-flex-direction-row level-item bulma-color-variable is-justify-content-end">
+        <strong class="is-size-6">${property.name}</strong>
+        <div class="cp_wrapper">
+          <input class="input bulma-variable" type="color" id="${property.name}" name="color" value="${property.computedValue}">
+        </div>
+      </div>`;
+    }
+
+    formElements.push(formElement);
+    formElement = '';
+  }
+
+  formElements.push('</div>');
+
+  return formElements.join('\n'); 
+}
 
 function createCustomAttributes(json, index) {
   const formElements = [];
@@ -83,7 +115,7 @@ function addCustomCssClassTemplate(index) {
     </div>
   `;
 
-  const formHtml = createCustomAttributes(json, index);
+  const formHtml = createCustomAttributes(cssProperties, index);
   addCssClassesTemplate += `\n${formHtml}`;
 
   return addCssClassesTemplate;
@@ -99,4 +131,4 @@ function addPlusButton(index) {
   return plusButtonTemplate;
 }
 
-export { addCustomCssClassTemplate, addPlusButton };
+export { addCustomCssClassTemplate, addPlusButton, createBulmaAttributes };
