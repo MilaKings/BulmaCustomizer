@@ -14,21 +14,43 @@ import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
   formElements.push(`<div class="field is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap">\n`);
 
   for (const property of bulmaVariables['variables']) {
-    if (property.computedType == 'color') {
-      formElement += `<div class="control m-2 is-flex is-flex-direction-row level-item bulma-color-variable is-justify-content-end">
-        <strong class="is-size-6">${property.name}</strong>
-        <div class="cp_wrapper">
-          <input class="input bulma-variable" type="color" id="${property.name}" name="color" value="${property.computedValue}">
+    // if (property.computedType == 'color') {
+    //   formElement += `<div class="control m-2 is-flex is-flex-direction-row level-item bulma-color-variable is-justify-content-end">
+    //     <strong class="is-size-6">${property.name}</strong>
+    //     <div class="cp_wrapper">
+    //       <input class="input bulma-variable" type="color" id="${property.name}" name="color" value="${property.computedValue}">
+    //     </div>
+    //   </div>`;
+    // }
+    if (property.computedType == 'size') {
+      if (Array.isArray(property.computedValue)) {
+        formElement += `<div class="field is-flex is-justify-content-space-evenly is-flex-direction-column max-label-size">
+        <label class="label custom-class-attribute">${property.name}</label>
+        <div class="field is-flex is-flex-direction-row">
+        <input class="input input-number-size custom-class-value mr-1" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
+        <input class="input input-number-size custom-class-value mr-1" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
+        <input class="input input-number-size custom-class-value mr-1" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
+        
         </div>
-      </div>`;
-    }
-
+        </div>`;
+      }/* else {
+        formElement += `<div class="field is-flex is-justify-content-space-evenly is-flex-direction-column max-label-size">
+        <label class="label custom-class-attribute">${property.name}</label>
+        <div class="field">
+        <input class="input input-number-size custom-class-value" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
+        </div>
+        </div>`;
+      }*/
+      }
+    
+    
     formElements.push(formElement);
     formElement = '';
   }
-
+  
   formElements.push('</div>');
-
+  
+  console.log(bulmaVariables['variables'])
   return formElements.join('\n'); 
 }
 

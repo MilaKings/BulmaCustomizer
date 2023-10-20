@@ -50,56 +50,6 @@
       "computedType": "color"
     },
     {
-      "name": "$primary-light",
-      "type": "compound",
-      "value": "findLightColor($primary)"
-    },
-    {
-      "name": "$primary-dark",
-      "type": "compound",
-      "value": "findDarkColor($primary)"
-    },
-    {
-      "name": "$info-light",
-      "type": "compound",
-      "value": "findLightColor($info)"
-    },
-    {
-      "name": "$info-dark",
-      "type": "compound",
-      "value": "findDarkColor($info)"
-    },
-    {
-      "name": "$success-light",
-      "type": "compound",
-      "value": "findLightColor($success)"
-    },
-    {
-      "name": "$success-dark",
-      "type": "compound",
-      "value": "findDarkColor($success)"
-    },
-    {
-      "name": "$warning-light",
-      "type": "compound",
-      "value": "findLightColor($warning)"
-    },
-    {
-      "name": "$warning-dark",
-      "type": "compound",
-      "value": "findDarkColor($warning)"
-    },
-    {
-      "name": "$danger-light",
-      "type": "compound",
-      "value": "findLightColor($danger)"
-    },
-    {
-      "name": "$danger-dark",
-      "type": "compound",
-      "value": "findDarkColor($danger)"
-    },
-    {
       "name": "$scheme-main",
       "type": "variable",
       "value": "$white",
@@ -177,11 +127,6 @@
       "computedType": "color"
     },
     {
-      "name": "$code",
-      "type": "compound",
-      "value": "darken($red, 15%)"
-    },
-    {
       "name": "$code-background",
       "type": "variable",
       "value": "$background",
@@ -208,16 +153,6 @@
       "value": "$blue",
       "computedValue": "#485fc7",
       "computedType": "color"
-    },
-    {
-      "name": "$link-light",
-      "type": "compound",
-      "value": "findLightColor($link)"
-    },
-    {
-      "name": "$link-dark",
-      "type": "compound",
-      "value": "findDarkColor($link)"
     },
     {
       "name": "$link-visited",
@@ -289,47 +224,60 @@
       "computedType": "font-family"
     },
     {
-      "name": "$size-small",
+      "name": "$size-1",
       "type": "variable",
-      "value": "$size-7",
-      "computedValue": "0.75rem",
-      "computedType": "size"
+      "value": "3",
+      "computedValue": "3",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
-      "name": "$size-normal",
+      "name": "$size-2",
       "type": "variable",
-      "value": "$size-6",
-      "computedValue": "1rem",
-      "computedType": "size"
+      "value": "2.5",
+      "computedValue": "2.5",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
-      "name": "$size-medium",
+      "name": "$size-3",
       "type": "variable",
-      "value": "$size-5",
-      "computedValue": "1.25rem",
-      "computedType": "size"
+      "value": "2",
+      "computedValue": "2",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
-      "name": "$size-large",
+      "name": "$size-4",
       "type": "variable",
-      "value": "$size-4",
-      "computedValue": "1.5rem",
-      "computedType": "size"
+      "value": "1.5",
+      "computedValue": "1.5",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
-      "name": "$custom-colors",
-      "type": "keyword",
-      "value": null
+      "name": "$size-5",
+      "type": "variable",
+      "value": "1.25",
+      "computedValue": "1.25",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
-      "name": "$custom-shades",
-      "type": "keyword",
-      "value": null
+      "name": "$size-6",
+      "type": "variable",
+      "value": "1",
+      "computedValue": "1",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
-      "name": "$sizes",
-      "type": "map",
-      "value": "$size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7"
+      "name": "$size-7",
+      "type": "variable",
+      "value": "0.75",
+      "computedValue": "0.75",
+      "computedType": "size",
+      "unity": "rem"
     },
     {
       "name": "$body-background-color",
@@ -340,18 +288,15 @@
     },
     {
       "name": "$body-size",
-      "type": "size",
-      "value": "16px"
+      "computedType": "size",
+      "computedValue": "16",
+      "unity": "px"
     },
     {
       "name": "$body-min-width",
-      "type": "size",
-      "value": "300px"
-    },
-    {
-      "name": "$body-rendering",
-      "type": "keyword",
-      "value": "optimizeLegibility"
+      "computedType": "size",
+      "computedValue": "300",
+      "unity": "px"
     },
     {
       "name": "$body-family",
@@ -379,8 +324,9 @@
     },
     {
       "name": "$body-font-size",
-      "type": "size",
-      "value": "1em"
+      "computedType": "size",
+      "computedValue": "1",
+      "unity": "em"
     },
     {
       "name": "$body-weight",
@@ -392,7 +338,7 @@
     {
       "name": "$body-line-height",
       "type": "unitless",
-      "value": "1.5"
+      "computedValue": "1.5"
     },
     {
       "name": "$code-family",
@@ -402,8 +348,9 @@
     },
     {
       "name": "$code-padding",
-      "type": "size",
-      "value": "0.25em 0.5em 0.25em"
+      "computedType": "size",
+      "computedValue": ["0.25", "0.5", "0.25"],
+      "unity": "em"
     },
     {
       "name": "$code-weight",
@@ -412,13 +359,15 @@
     },
     {
       "name": "$code-size",
-      "type": "size",
-      "value": "0.875em"
+      "computedType": "size",
+      "computedValue": "0.875",
+      "unity": "em"
     },
     {
       "name": "$small-font-size",
-      "type": "size",
-      "value": "0.875em"
+      "computedType": "size",
+      "computedValue": "0.875",
+      "unity": "em"
     },
     {
       "name": "$hr-background-color",
@@ -429,13 +378,9 @@
     },
     {
       "name": "$hr-height",
-      "type": "size",
-      "value": "2px"
-    },
-    {
-      "name": "$hr-margin",
-      "type": "size",
-      "value": "1.5rem 0"
+      "computedType": "size",
+      "computedValue": "2",
+      "unity": "px"
     },
     {
       "name": "$strong-color",
@@ -453,18 +398,21 @@
     },
     {
       "name": "$pre-font-size",
-      "type": "size",
-      "value": "0.875em"
+      "computedType": "size",
+      "computedValue": "0.875",
+      "unity": "em"
     },
     {
       "name": "$pre-padding",
-      "type": "size",
-      "value": "1.25rem 1.5rem"
+      "computedType": "size",
+      "computedValue": ["1.25", "1.5"],
+      "unity": "rem"
     },
     {
       "name": "$pre-code-font-size",
-      "type": "size",
-      "value": "1em"
+      "computedType": "size",
+      "computedValue": "1",
+      "unity": "em"
     }
   ]
 }
