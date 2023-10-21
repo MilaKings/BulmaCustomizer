@@ -42,10 +42,10 @@ function changePageStyle() {
 }
 
 function extractFontFamilyFromUrl(url) {
-  const fontNameRegex = /https?:\/\/fonts.googleapis.com\/css\?family=([^&:]+)/;
+  const fontNameRegex = /(family=|specimen\/)([^?&]+)/;
   const match = url.match(fontNameRegex);
 
-  return (match && match[1]) ? match[1] : false;
+  return (match && match[2]) ? match[2] : false;
 }
 
 function createSassString() {
@@ -53,21 +53,27 @@ function createSassString() {
   let importUrlString = '';
   let urlFont = '';
   let sassString = '';
+  let fontVariables = '';
 
   bulmaVariables.forEach(item => {
-    if (item.id === "@import url") {
-      importUrlString = `@import url('${item.value}');\n`;
-      urlFont = item.value;
+    if (item.value == '') return;
+
+    if ((item.id === "$family-primary") || (item.id === "$family-sans-serif")) {
+      urlFont = extractFontFamilyFromUrl(item.value);
+      importUrlString += `@import url('https://fonts.googleapis.com/css?family=${urlFont}');\n`;
+      fontVariables += `\n${item.id}: ${urlFont.replace('+', ' ')}, sans-serif;`;
     } else {
-      sassString += `\n${item.id}: ${item.value};`;
+      const classes = item.className.split(' ');
+      let unity = '';
+      const lastClass = classes[classes.length - 1];
+      
+      if ((lastClass == 'px') || (lastClass == 'em') || (lastClass == 'rem')) unity = lastClass;
+
+      sassString += `\n${item.id}: ${item.value}${unity};`;
     }
   });
 
-  urlFont = extractFontFamilyFromUrl(urlFont);
-  if (importUrlString && urlFont) {
-    sassString = `${importUrlString} ${sassString} \n$family-sans-serif: ${urlFont}, sans-serif;`;
-  }
-
+  sassString = `${importUrlString}${sassString}${fontVariables}`;
   return sassString;
 }
 
@@ -225,18 +231,30 @@ function isClassNameValid() {
   return isClassNameValid;
 }
 
+function addHrAfterElement(className) {
+  let hr = document.createElement('hr');
+  hr.classList.add('solid', 'full-width');
+  let inputVariables = document.querySelectorAll(className);
+  let lastInputVariable = inputVariables[inputVariables.length - 1];
+  lastInputVariable.parentNode.insertBefore(hr, lastInputVariable.nextElementSibling);
+}
+
 testCSSCheckBox[1].addEventListener('change', async () => { changePageStyle() });
 
 tabs.addEventListener('click', () => {
   const tabClicked = event.target.closest('li');
   openTab(tabClicked.id);
-})
+});
 
 addCssClassesTemplateButtom.addEventListener('click', () => {
   addCreateNewCustomClass();
 });
 
 customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.createBulmaAttributes());
+addHrAfterElement('.bulma-color');
+addHrAfterElement('.bulma-font');
+addHrAfterElement('.bulma-size');
+customBulmaVariableContainer.firstChild.classList.remove('is-hidden');
 
 compileButton.addEventListener('click', async () => {
   if (!isThereAnyEmptyClassName() && isClassNameValid()) {

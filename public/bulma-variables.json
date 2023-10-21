@@ -204,23 +204,45 @@
       "computedType": "color"
     },
     {
+      "name": "$body-color",
+      "type": "variable",
+      "value": "$text",
+      "computedValue": "#4a4a4a",
+      "computedType": "color"
+    },
+    {
+      "name": "$body-background-color",
+      "type": "variable",
+      "value": "$scheme-main",
+      "computedValue": "#ffffff",
+      "computedType": "color"
+    },
+    {
+      "name": "$strong-color",
+      "type": "variable",
+      "value": "$text-strong",
+      "computedValue": "#363636",
+      "computedType": "color"
+    },
+    {
+      "name": "$hr-background-color",
+      "type": "variable",
+      "value": "$background",
+      "computedValue": "#f5f5f5",
+      "computedType": "color"
+    },
+    {
+      "name": "$family-sans-serif",
+      "type": "variable",
+      "value": "$family-sans-serif",
+      "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
+      "computedType": "font-family"
+    },
+    {
       "name": "$family-primary",
       "type": "variable",
-      "value": "$family-sans-serif",
+      "value": "$family-primary",
       "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
-      "computedType": "font-family"
-    },
-    {
-      "name": "$family-secondary",
-      "type": "variable",
-      "value": "$family-sans-serif",
-      "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
-      "computedType": "font-family"
-    },
-    {
-      "name": "$family-code",
-      "type": "variable",
-      "value": "$family-monospace",
       "computedType": "font-family"
     },
     {
@@ -280,13 +302,6 @@
       "unity": "rem"
     },
     {
-      "name": "$body-background-color",
-      "type": "variable",
-      "value": "$scheme-main",
-      "computedValue": "#ffffff",
-      "computedType": "color"
-    },
-    {
       "name": "$body-size",
       "computedType": "size",
       "computedValue": "16",
@@ -299,13 +314,6 @@
       "unity": "px"
     },
     {
-      "name": "$body-family",
-      "type": "variable",
-      "value": "$family-primary",
-      "computedValue": "BlinkMacSystemFont, -apple-system, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
-      "computedType": "font-family"
-    },
-    {
       "name": "$body-overflow-x",
       "type": "string",
       "value": "hidden"
@@ -314,13 +322,6 @@
       "name": "$body-overflow-y",
       "type": "string",
       "value": "scroll"
-    },
-    {
-      "name": "$body-color",
-      "type": "variable",
-      "value": "$text",
-      "computedValue": "#4a4a4a",
-      "computedType": "color"
     },
     {
       "name": "$body-font-size",
@@ -341,18 +342,6 @@
       "computedValue": "1.5"
     },
     {
-      "name": "$code-family",
-      "type": "variable",
-      "value": "$family-code",
-      "computedType": "font-family"
-    },
-    {
-      "name": "$code-padding",
-      "computedType": "size",
-      "computedValue": ["0.25", "0.5", "0.25"],
-      "unity": "em"
-    },
-    {
       "name": "$code-weight",
       "type": "font-weight",
       "value": "normal"
@@ -370,24 +359,10 @@
       "unity": "em"
     },
     {
-      "name": "$hr-background-color",
-      "type": "variable",
-      "value": "$background",
-      "computedValue": "#f5f5f5",
-      "computedType": "color"
-    },
-    {
       "name": "$hr-height",
       "computedType": "size",
       "computedValue": "2",
       "unity": "px"
-    },
-    {
-      "name": "$strong-color",
-      "type": "variable",
-      "value": "$text-strong",
-      "computedValue": "#363636",
-      "computedType": "color"
     },
     {
       "name": "$strong-weight",
@@ -403,15 +378,21 @@
       "unity": "em"
     },
     {
+      "name": "$pre-code-font-size",
+      "computedType": "size",
+      "computedValue": "1",
+      "unity": "em"
+    },
+    {
       "name": "$pre-padding",
       "computedType": "size",
       "computedValue": ["1.25", "1.5"],
       "unity": "rem"
     },
     {
-      "name": "$pre-code-font-size",
+      "name": "$code-padding",
       "computedType": "size",
-      "computedValue": "1",
+      "computedValue": ["0.25", "0.5", "0.25"],
       "unity": "em"
     }
   ]

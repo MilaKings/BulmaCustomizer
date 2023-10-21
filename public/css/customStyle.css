@@ -7,6 +7,14 @@ select {
   width: 19%;
 }
 
+.multiple-input-number-size {
+  width: 34%;
+}
+
+.max-label-size-multiple-input {
+  width: 25%;
+}
+
 .is-small-custom {
   width: 30%;
 }
@@ -26,6 +34,14 @@ select {
 
 .input-number-size {
   width: 55%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.bulma-font {
+  width: 40%;
 }
 
 input[type="color"] {
