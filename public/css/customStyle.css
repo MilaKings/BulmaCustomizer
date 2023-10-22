@@ -28,6 +28,12 @@ select {
   width: 19%;
 }
 
+.custom-color-align {
+  top: 0;
+  position: absolute;
+  margin-top: 1vmax;
+}
+
 .max-label-custom-color-size {
   align-items: flex-start;
   width: 48%;

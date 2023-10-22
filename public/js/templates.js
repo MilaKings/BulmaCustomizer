@@ -174,9 +174,10 @@ function addBulmaCustomColorTemplate(index) {
           <label class="label">Nome da cor</label>
           <input class="input custom-color-name" id="custom-color-name-${index}" type="text">
           <p class="help is-danger is-hidden">Nome de classe inválido! Por favor, escolha um nome contendo apenas letras maíusculas ou minúsculas, hifens ou underscore!</p>
-        </div>
-        <div class="field is-flex is-flex-direction-column is-align-self-flex-end mb-4 is-justify-content-space-evenly max-label-custom-color-size">
-          <div class="control is-flex is-flex-direction-row level-item">
+          <p class="help is-danger is-hidden">Nome de classe repetido! Por favor, escolha somente nomes únicos!</p>
+          </div>
+        <div class="field is-flex is-flex-direction-column is-justify-content-center max-label-custom-color-size">
+          <div class="control is-flex is-flex-direction-row level-item custom-color-align">
             <strong class="is-size-6 custom-color-attribute">color</strong>
             <div class="cp_wrapper">
               <input class="input custom-color-value" type="color" id="custom-color-${index}" name="color" value="#ffffff">
@@ -203,7 +204,7 @@ function addBulmaCustomColorTemplate(index) {
 
 function createMessage() {
   let message = `
-  <article class="danger-message message is-hidden is-danger">
+  <article class="danger-message message is-danger">
     <div class="message-header">
       <p>Ooops!</p>
       <button class="delete delete-danger-message" aria-label="delete"></button>

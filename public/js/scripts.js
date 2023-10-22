@@ -8,7 +8,6 @@ let addClassContainer = document.getElementById('add-class-container');
 let customBulmaVariableContainer = document.getElementById('customize-variables-container');
 let addCustomColorContainer = '';
 let removeCustomColorContainer = '';
-let dangerMessage = '';
 let index = 0;
 let indexColor = 0;
 let cssContent = '';
@@ -251,33 +250,38 @@ function isThereAnyEmptyClassName() {
   return emptyClassName;
 }
 
-function isThereAnyRepeatedCustomColorName() {
+function isCustomColorsNameValid() {
+  let isValid = isClassNameValid('.custom-color-name');
   let customColorNames = document.querySelectorAll('.custom-color-name');
-  let customColorValues = [];
-  customColorNames.forEach(color => { if (color.value) customColorValues.push(color.value.trim()) });
-  const colorsSet = new Set(customColorValues);
 
-  if ((colorsSet.size < customColorValues.length)) {
-    let containerButtons = document.querySelector('.compile-download-buttons');
-    containerButtons.insertAdjacentHTML('beforebegin', template.createMessage());
-    dangerMessage = document.querySelector('.danger-message');
+  for (let i = 0; i < customColorNames.length; i++) {
+    for (let j = i + 1; j < customColorNames.length; j++) {
+        if (i !== j) {
+          if ((customColorNames[i].value.trim() === customColorNames[j].value.trim())
+          && (customColorNames[i].value.trim() !== '')) {
+            isValid = false;
+            customColorNames[i].nextElementSibling.nextElementSibling.classList.add('is-danger');
+            customColorNames[j].nextElementSibling.nextElementSibling.classList.add('is-danger');
+            customColorNames[i].nextElementSibling.nextElementSibling.classList.remove('is-hidden');
+            customColorNames[j].nextElementSibling.nextElementSibling.classList.remove('is-hidden');
+          } else {
+            customColorNames[i].nextElementSibling.nextElementSibling.classList.remove('is-danger');
+            customColorNames[j].nextElementSibling.nextElementSibling.classList.remove('is-danger');
+            customColorNames[i].nextElementSibling.nextElementSibling.classList.add('is-hidden');
+            customColorNames[j].nextElementSibling.nextElementSibling.classList.add('is-hidden');
+          }
+        }
+      }
+    }
 
-    let deleteDangerMessage = document.querySelector('.delete-danger-message');
-    deleteDangerMessage.addEventListener('click', () => { dangerMessage.remove() });
-    dangerMessage.classList.remove('is-hidden');
-
-
-  }
-
-
-  return colorsSet.size < customColorValues.length;
+  return isValid;
 }
 
-function isClassNameValid() {
+function isClassNameValid(className) {
   let classNameRegex = /^[a-zA-Z0-9-_]*$/;
   let isClassNameValid = true;
 
-  let classNameInput = document.querySelectorAll('.class-name');
+  let classNameInput = document.querySelectorAll(className);
   classNameInput.forEach(input => {
     input.parentElement.lastElementChild.classList.add('is-hidden');
     if (input.value.trim().match(classNameRegex)) {
@@ -304,7 +308,6 @@ function addHrAfterElement(className) {
 function removeCreateNewColor() {
   let addCustomColorContainer = getElementByMatchedIdNumber(event.currentTarget.id, 'add-custom-color-container-');
   let customColorContainer = document.querySelectorAll('.custom-color');
-
   if (customColorContainer.length > 1) addCustomColorContainer.remove();
 }
 
@@ -343,13 +346,10 @@ tabs.addEventListener('click', () => {
   openTab(tabClicked.id);
 });
 
-addCssClassesTemplateButtom.addEventListener('click', () => {
-  addCreateNewCustomClass();
-});
-
+addCssClassesTemplateButtom.addEventListener('click', () => { addCreateNewCustomClass() });
 
 compileButton.addEventListener('click', async () => {
-  if (!isThereAnyEmptyClassName() && !isThereAnyRepeatedCustomColorName() && isClassNameValid()) {
+  if (!isThereAnyEmptyClassName() && isCustomColorsNameValid() && isClassNameValid('.class-name')) {
     try {
       compileButton.classList.add('is-loading');
       let sassString = createSassString();
