@@ -8,6 +8,7 @@ let addClassContainer = document.getElementById('add-class-container');
 let customBulmaVariableContainer = document.getElementById('customize-variables-container');
 let addCustomColorContainer = '';
 let removeCustomColorContainer = '';
+let dangerMessage = '';
 let index = 0;
 let indexColor = 0;
 let cssContent = '';
@@ -61,21 +62,6 @@ function createSassString() {
   let codePaddingValues = '';
   let prePadding = '';
   let codePadding = '';
-  let customColorNames = document.querySelectorAll('.custom-color-name');
-  let customColorValues = document.querySelectorAll('.custom-color-value');
-
-  let a = '';
-  let b = '';
-  let lastCustomColorIndex = customColorNames.length - 1;
-  for (let i = 0; i < customColorNames.length; i++) {
-    a += `
-    $${customColorNames[i].value}: ${customColorValues[i].value};
-    $${customColorNames[i].value}-invert: findColorInvert($${customColorNames[i].value});`;
-
-    b = `"${customColorNames[i].value}": ($${customColorNames[i].value}, $${customColorNames[i].value}-invert)${(lastCustomColorIndex > i) ? ', ' : ''}`;
-  }
-  let c = `$custom-colors: (${b})`;
-console.log(c);
 
   bulmaVariables.forEach(item => {
     if (item.value == '') return;
@@ -88,7 +74,7 @@ console.log(c);
       const classes = item.className.split(' ');
       let unity = '';
       const lastClass = classes[classes.length - 1];
-      
+
       if ((lastClass == 'px') || (lastClass == 'em') || (lastClass == 'rem')) unity = lastClass;
 
       if (item.id === "$pre-padding") {
@@ -103,9 +89,33 @@ console.log(c);
     }
   });
 
-  sassString = `${importUrlString}${sassString}${codePadding}${prePadding}${fontVariables}`;
+  const customColors = getCustomColors();
+  sassString = `${importUrlString}${sassString}${codePadding}${prePadding}${fontVariables}${customColors}`;
 
   return sassString;
+}
+
+function getCustomColors() {
+  let setCustomColor = '';
+  let customColors = '';
+  let colorMap = '';
+  let customColorNames = document.querySelectorAll('.custom-color-name');
+  let customColorValues = document.querySelectorAll('.custom-color-value');
+  let lastCustomColorIndex = customColorNames.length - 1;
+
+  for (let i = 0; i < customColorNames.length; i++) {
+    if (!customColorNames[i].value) continue;
+
+    setCustomColor += `
+    $${customColorNames[i].value.trim()}: ${customColorValues[i].value};
+    $${customColorNames[i].value.trim()}-invert: findColorInvert($${customColorNames[i].value.trim()});\n`;
+
+    customColors += `"${customColorNames[i].value}": ($${customColorNames[i].value.trim()}, $${customColorNames[i].value.trim()}-invert)${(lastCustomColorIndex > i) ? ', ' : ''}`;
+  }
+
+  if (setCustomColor) colorMap = `${setCustomColor}$custom-colors: (${customColors});`;
+
+  return colorMap;
 }
 
 function createCustomCss() {
@@ -166,14 +176,14 @@ function addCreateNewCustomClass() {
 
 function setInputImageFileName() {
   const fileInput = document.querySelectorAll('.file-input');
-  
+
   fileInput.forEach(file => {
     file.onchange = () => {
       const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (validImageTypes.includes(file.files[0].type)) {
         file.nextElementSibling.nextElementSibling.textContent = file.files[0].name;
       } else {
-        file.files[0].value = ''; 
+        file.files[0].value = '';
       }
     }
   });
@@ -241,6 +251,28 @@ function isThereAnyEmptyClassName() {
   return emptyClassName;
 }
 
+function isThereAnyRepeatedCustomColorName() {
+  let customColorNames = document.querySelectorAll('.custom-color-name');
+  let customColorValues = [];
+  customColorNames.forEach(color => { if (color.value) customColorValues.push(color.value.trim()) });
+  const colorsSet = new Set(customColorValues);
+
+  if ((colorsSet.size < customColorValues.length)) {
+    let containerButtons = document.querySelector('.compile-download-buttons');
+    containerButtons.insertAdjacentHTML('beforebegin', template.createMessage());
+    dangerMessage = document.querySelector('.danger-message');
+
+    let deleteDangerMessage = document.querySelector('.delete-danger-message');
+    deleteDangerMessage.addEventListener('click', () => { dangerMessage.remove() });
+    dangerMessage.classList.remove('is-hidden');
+
+
+  }
+
+
+  return colorsSet.size < customColorValues.length;
+}
+
 function isClassNameValid() {
   let classNameRegex = /^[a-zA-Z0-9-_]*$/;
   let isClassNameValid = true;
@@ -269,6 +301,41 @@ function addHrAfterElement(className) {
   lastInputVariable.parentNode.insertBefore(hr, lastInputVariable.nextElementSibling);
 }
 
+function removeCreateNewColor() {
+  let addCustomColorContainer = getElementByMatchedIdNumber(event.currentTarget.id, 'add-custom-color-container-');
+  let customColorContainer = document.querySelectorAll('.custom-color');
+
+  if (customColorContainer.length > 1) addCustomColorContainer.remove();
+}
+
+function addCreateNewColor() {
+  indexColor++;
+  customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.addBulmaCustomColorTemplate(indexColor));
+  addCustomColorContainer = document.getElementById('custom-color-plus-button-' + indexColor);
+  removeCustomColorContainer = document.getElementById('custom-color-trash-button-' + indexColor);
+  removeCustomColorContainer.addEventListener('click', () => { removeCreateNewColor() });
+  addCustomColorContainer.onclick = () => { addCreateNewColor() };
+}
+
+function setCustomVariablesTemplate() {
+  customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.createBulmaAttributes());
+
+  addHrAfterElement('.bulma-color');
+  addHrAfterElement('.bulma-font');
+  addHrAfterElement('.bulma-size');
+  addHrAfterElement('.bulma-multiple-size');
+
+  customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.addBulmaCustomColorTemplate(indexColor));
+  customBulmaVariableContainer.firstChild.classList.remove('is-hidden');
+
+  addCustomColorContainer = document.getElementById('custom-color-plus-button-' + indexColor);
+  addCustomColorContainer.addEventListener('click', () => { addCreateNewColor() });
+  removeCustomColorContainer = document.getElementById('custom-color-trash-button-' + indexColor);
+  removeCustomColorContainer.addEventListener('click', () => { removeCreateNewColor(indexColor) });
+}
+
+setCustomVariablesTemplate();
+
 testCSSCheckBox[1].addEventListener('change', async () => { changePageStyle() });
 
 tabs.addEventListener('click', () => {
@@ -280,38 +347,9 @@ addCssClassesTemplateButtom.addEventListener('click', () => {
   addCreateNewCustomClass();
 });
 
-customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.createBulmaAttributes());
-addHrAfterElement('.bulma-color');
-addHrAfterElement('.bulma-font');
-addHrAfterElement('.bulma-size');
-addHrAfterElement('.bulma-multiple-size');
-customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.addBulmaCustomColorTemplate(indexColor));
-customBulmaVariableContainer.firstChild.classList.remove('is-hidden');
-addCustomColorContainer = document.getElementById('custom-color-plus-button-' + indexColor);
-removeCustomColorContainer = document.getElementById('custom-color-trash-button-' + indexColor);
-
-
-addCustomColorContainer.addEventListener('click', () => { addCreateNewColor() });
-removeCustomColorContainer.addEventListener('click', () => { removeCreateNewColor(indexColor) });
-
-function removeCreateNewColor() {
-  let addCustomColorContainer = getElementByMatchedIdNumber(event.currentTarget.id, 'add-custom-color-container-');
-  let customColorContainer = document.querySelectorAll('.custom-color');
-  
-  if (customColorContainer.length > 1) addCustomColorContainer.remove();
-}
-
-function addCreateNewColor() {
-  indexColor++; 
-  customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.addBulmaCustomColorTemplate(indexColor));
-  addCustomColorContainer = document.getElementById('custom-color-plus-button-' + indexColor);
-  removeCustomColorContainer = document.getElementById('custom-color-trash-button-' + indexColor);
-  removeCustomColorContainer.addEventListener('click', () => { removeCreateNewColor() });
-  addCustomColorContainer.onclick = () => { addCreateNewColor() };
-}
 
 compileButton.addEventListener('click', async () => {
-  if (!isThereAnyEmptyClassName() && isClassNameValid()) {
+  if (!isThereAnyEmptyClassName() && !isThereAnyRepeatedCustomColorName() && isClassNameValid()) {
     try {
       compileButton.classList.add('is-loading');
       let sassString = createSassString();
@@ -320,24 +358,24 @@ compileButton.addEventListener('click', async () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sassString })
       });
-  
+
       cssContent = await response.text();
       let customClassesString = createCustomCss();
       if (customClassesString) cssContent = `${cssContent} \n${customClassesString}`;
-  
+
       compileButton.classList.remove('is-loading');
       testCSSCheckBox[1].checked = false;
-  
+
       const blob = new Blob([cssContent], { type: 'text/css' });
       const url = URL.createObjectURL(blob);
-  
+
       downloadButton.href = url;
       downloadButton.download = 'compiled.css';
-  
+
       ['disabled', 'title'].forEach(attribute => downloadButton.removeAttribute(attribute));
       testCSSCheckBox.forEach(item => { item.removeAttribute('disabled') });
     } catch (error) {
       console.error('Erro ao compilar Sass:', error);
-    }  
+    }
   }
 });

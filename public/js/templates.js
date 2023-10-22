@@ -4,12 +4,12 @@ import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
 function createBulmaAttributes() {
   const formElements = [];
   let formElement = '';
-  
+
   formElements.push(`<div class="field is-hidden is-flex is-flex-direction-row mb-2 is-justify-content-start is-flex-wrap-wrap">\n`);
 
   for (const property of bulmaVariables['variables']) {
     if (property.computedType == 'color') {
-      formElement += 
+      formElement +=
       `<div class="control bulma-color m-2 is-flex is-flex-direction-row level-item bulma-color-variable is-justify-content-end">
           <strong class="is-size-6">${property.name}</strong>
           <div class="cp_wrapper">
@@ -24,7 +24,7 @@ function createBulmaAttributes() {
           multipleValues += `<input class="bulma-variable input multiple-input-number-size custom-class-value mr-1 ${property.unity}" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${value}">\n`;
         });
 
-        formElement += 
+        formElement +=
         `<div class="field bulma-multiple-size is-flex is-justify-content-space-evenly is-flex-direction-column max-label-size-multiple-input">
           <label class="label custom-class-attribute">${property.name}</label>
           <div class="field is-flex is-flex-direction-row">
@@ -38,7 +38,7 @@ function createBulmaAttributes() {
         <div class="field bulma-size is-flex is-justify-content-space-evenly is-flex-direction-column max-label-size">
           <label class="label custom-class-attribute">${property.name}</label>
           <div class="field">
-            <input class="input bulma-variable input-number-size custom-class-value ${property.unity ? property.unity : ''}" 
+            <input class="input bulma-variable input-number-size custom-class-value ${property.unity ? property.unity : ''}"
             type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
           </div>
         </div>`;
@@ -49,28 +49,28 @@ function createBulmaAttributes() {
         <strong class="is-size-6">${property.name}</strong>
         <input class="input m-2 is-size-8 bulma-variable" type="text" id="${property.name}"
         placeholder="Cole a URL da fonte do Google API aqui!">
-      </div>`; 
+      </div>`;
     }
-    
+
     formElements.push(formElement);
     formElement = '';
   }
-  
+
   formElements.push('</div>');
-  
-  return formElements.join('\n'); 
+
+  return formElements.join('\n');
 }
 
 function createCustomAttributes(json, index) {
   const formElements = [];
   let formElement = '';
-  
+
   formElements.push(`<div class="container is-flex is-justify-content-space-around is-flex-direction-row is-flex-wrap-wrap">\n`);
 
   for (const property of json['css-properties']) {
     if (property.type != 'color') {
       formElement += `
-      <div class="field is-flex is-justify-content-space-evenly is-flex-direction-column 
+      <div class="field is-flex is-justify-content-space-evenly is-flex-direction-column
         ${(property.type === 'image') ? 'max-label-image-size' : 'max-label-size'}">
         <label class="label custom-class-attribute">${property.name}</label>`;
     }
@@ -106,7 +106,7 @@ function createCustomAttributes(json, index) {
           </span>
           <span class="file-name"></span>
         </label>`;
-    } 
+    }
 
     formElement += `
     </div>
@@ -181,7 +181,7 @@ function addBulmaCustomColorTemplate(index) {
             <div class="cp_wrapper">
               <input class="input custom-color-value" type="color" id="custom-color-${index}" name="color" value="#ffffff">
             </div>
-          </div> 
+          </div>
         </div>
         <p id="buttons-container-${index}" class="buttons is-align-content-flex-start">
           <button id="custom-color-plus-button-${index}" class="button" title="Adicionar cor">
@@ -198,7 +198,23 @@ function addBulmaCustomColorTemplate(index) {
       </div>
     </div>`;
 
-    return template;
+  return template;
 }
 
-export { addCustomCssClassTemplate, addPlusButton, createBulmaAttributes, addBulmaCustomColorTemplate };
+function createMessage() {
+  let message = `
+  <article class="danger-message message is-hidden is-danger">
+    <div class="message-header">
+      <p>Ooops!</p>
+      <button class="delete delete-danger-message" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      <p class="is-hidden custom-color-repeated">Há nomes de cores repetidos! Por favor, altere o nome das cores repetidas.</p>
+      <p class="is-hidden custom-color-invalid">Nome de classe inválido! Por favor, escolha um nome contendo apenas letras maíusculas ou minúsculas, hifens ou underscore!</p>
+    </div>
+  </article>`;
+
+  return message;
+}
+
+export { addCustomCssClassTemplate, addPlusButton, createBulmaAttributes, addBulmaCustomColorTemplate, createMessage };
