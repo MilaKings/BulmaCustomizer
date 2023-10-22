@@ -1,11 +1,11 @@
 import cssProperties from "../css-properties.json" assert { type: 'json' };
 import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
 
-  function createBulmaAttributes() {
+function createBulmaAttributes() {
   const formElements = [];
   let formElement = '';
   
-  formElements.push(`<div class="field is-hidden is-flex is-flex-direction-row is-justify-content-start is-flex-wrap-wrap">\n`);
+  formElements.push(`<div class="field is-hidden is-flex is-flex-direction-row mb-2 is-justify-content-start is-flex-wrap-wrap">\n`);
 
   for (const property of bulmaVariables['variables']) {
     if (property.computedType == 'color') {
@@ -15,15 +15,13 @@ import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
           <div class="cp_wrapper">
             <input class="input bulma-variable" type="color" id="${property.name}" name="color" value="${property.computedValue}">
           </div>
-        </div>`;
+      </div>`;
     } else if (property.computedType == 'size') {
       if (Array.isArray(property.computedValue)) {
         let multipleValues = '';
-        let index = 0;
 
         property.computedValue.forEach(value => {
-          multipleValues += `<input class="bulma-variable input multiple-input-number-size custom-class-value mr-1" type="number" id="${property.name}-${index}" placeholder="in ${property.unity}" value="${value}">\n`;
-          index++;
+          multipleValues += `<input class="bulma-variable input multiple-input-number-size custom-class-value mr-1 ${property.unity}" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${value}">\n`;
         });
 
         formElement += 
@@ -33,25 +31,25 @@ import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
             ${multipleValues}
           </div>
         </div>`;
-        
-        index = 0;
+
         multipleValues = '';
       } else {
-        formElement += 
-        `<div class="field bulma-size is-flex is-justify-content-space-evenly is-flex-direction-column max-label-size">
+        formElement += `
+        <div class="field bulma-size is-flex is-justify-content-space-evenly is-flex-direction-column max-label-size">
           <label class="label custom-class-attribute">${property.name}</label>
           <div class="field">
-            <input class="input bulma-variable input-number-size custom-class-value ${property.unity ? property.unity : ''}" type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
+            <input class="input bulma-variable input-number-size custom-class-value ${property.unity ? property.unity : ''}" 
+            type="number" id="${property.name}" placeholder="in ${property.unity}" value="${property.computedValue}">
           </div>
         </div>`;
       }
     } else if (property.computedType == 'font-family') {
-      formElement += 
-        `<div class="control bulma-font m-2 is-flex is-flex-direction-row level-item">
-          <strong class="is-size-6">${property.name}</strong>
-          <input class="input m-2 is-size-8 is-link bulma-variable" type="text" id="${property.name}"
-          placeholder="Cole a fonte do Google API aqui!">
-        </div>`; 
+      formElement += `
+      <div class="control bulma-font m-2 is-flex is-flex-direction-row level-item">
+        <strong class="is-size-6">${property.name}</strong>
+        <input class="input m-2 is-size-8 bulma-variable" type="text" id="${property.name}"
+        placeholder="Cole a URL da fonte do Google API aqui!">
+      </div>`; 
     }
     
     formElements.push(formElement);
@@ -60,7 +58,6 @@ import bulmaVariables from "../bulma-variables.json" assert { type: 'json' };
   
   formElements.push('</div>');
   
-  console.log(bulmaVariables['variables'])
   return formElements.join('\n'); 
 }
 
@@ -169,4 +166,39 @@ function addPlusButton(index) {
   return plusButtonTemplate;
 }
 
-export { addCustomCssClassTemplate, addPlusButton, createBulmaAttributes };
+function addBulmaCustomColorTemplate(index) {
+  let template = `
+    <div id="add-custom-color-container-${index}" class="custom-color field container is-flex-direction-column">
+      <div class="container is-flex-direction-row is-flex is-justify-content-start">
+        <div class="field mr-5 is-small-custom">
+          <label class="label">Nome da cor</label>
+          <input class="input custom-color-name" id="custom-color-name-${index}" type="text">
+          <p class="help is-danger is-hidden">Nome de classe inválido! Por favor, escolha um nome contendo apenas letras maíusculas ou minúsculas, hifens ou underscore!</p>
+        </div>
+        <div class="field is-flex is-flex-direction-column is-align-self-flex-end mb-4 is-justify-content-space-evenly max-label-custom-color-size">
+          <div class="control is-flex is-flex-direction-row level-item">
+            <strong class="is-size-6 custom-color-attribute">color</strong>
+            <div class="cp_wrapper">
+              <input class="input custom-color-value" type="color" id="custom-color-${index}" name="color" value="#ffffff">
+            </div>
+          </div> 
+        </div>
+        <p id="buttons-container-${index}" class="buttons is-align-content-flex-start">
+          <button id="custom-color-plus-button-${index}" class="button" title="Adicionar cor">
+            <span class="icon is-large has-text-info">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </span>
+          </button>
+          <button id="custom-color-trash-button-${index}" class="button close-custom-color-button" title="Deletar cor">
+            <span class="icon has-text-danger">
+            <i class="fa-solid fa-trash"></i>
+            </span>
+          </button>
+        </p>
+      </div>
+    </div>`;
+
+    return template;
+}
+
+export { addCustomCssClassTemplate, addPlusButton, createBulmaAttributes, addBulmaCustomColorTemplate };

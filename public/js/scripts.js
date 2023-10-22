@@ -6,7 +6,10 @@ let downloadButton = document.getElementById('downloadButton');
 let addCssClassesTemplateButtom = document.getElementById('add-custom-class');
 let addClassContainer = document.getElementById('add-class-container');
 let customBulmaVariableContainer = document.getElementById('customize-variables-container');
+let addCustomColorContainer = '';
+let removeCustomColorContainer = '';
 let index = 0;
+let indexColor = 0;
 let cssContent = '';
 let addClassTab = '';
 let addNewClass = '';
@@ -54,6 +57,25 @@ function createSassString() {
   let urlFont = '';
   let sassString = '';
   let fontVariables = '';
+  let prePaddingValues = '';
+  let codePaddingValues = '';
+  let prePadding = '';
+  let codePadding = '';
+  let customColorNames = document.querySelectorAll('.custom-color-name');
+  let customColorValues = document.querySelectorAll('.custom-color-value');
+
+  let a = '';
+  let b = '';
+  let lastCustomColorIndex = customColorNames.length - 1;
+  for (let i = 0; i < customColorNames.length; i++) {
+    a += `
+    $${customColorNames[i].value}: ${customColorValues[i].value};
+    $${customColorNames[i].value}-invert: findColorInvert($${customColorNames[i].value});`;
+
+    b = `"${customColorNames[i].value}": ($${customColorNames[i].value}, $${customColorNames[i].value}-invert)${(lastCustomColorIndex > i) ? ', ' : ''}`;
+  }
+  let c = `$custom-colors: (${b})`;
+console.log(c);
 
   bulmaVariables.forEach(item => {
     if (item.value == '') return;
@@ -69,11 +91,20 @@ function createSassString() {
       
       if ((lastClass == 'px') || (lastClass == 'em') || (lastClass == 'rem')) unity = lastClass;
 
-      sassString += `\n${item.id}: ${item.value}${unity};`;
+      if (item.id === "$pre-padding") {
+        prePaddingValues += ` ${item.value}${unity}`;
+        prePadding = `\n${item.id}: ${prePaddingValues};`;
+      } else if (item.id === "$code-padding") {
+        codePaddingValues += ` ${item.value}${unity}`;
+        codePadding = `\n${item.id}: ${codePaddingValues};`;
+      } else {
+        sassString += `\n${item.id}: ${item.value}${unity};`;
+      }
     }
   });
 
-  sassString = `${importUrlString}${sassString}${fontVariables}`;
+  sassString = `${importUrlString}${sassString}${codePadding}${prePadding}${fontVariables}`;
+
   return sassString;
 }
 
@@ -130,7 +161,6 @@ function addCreateNewCustomClass() {
   });
 
   setInputImageFileName();
-
   index++;
 }
 
@@ -254,14 +284,37 @@ customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.createBulm
 addHrAfterElement('.bulma-color');
 addHrAfterElement('.bulma-font');
 addHrAfterElement('.bulma-size');
+addHrAfterElement('.bulma-multiple-size');
+customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.addBulmaCustomColorTemplate(indexColor));
 customBulmaVariableContainer.firstChild.classList.remove('is-hidden');
+addCustomColorContainer = document.getElementById('custom-color-plus-button-' + indexColor);
+removeCustomColorContainer = document.getElementById('custom-color-trash-button-' + indexColor);
+
+
+addCustomColorContainer.addEventListener('click', () => { addCreateNewColor() });
+removeCustomColorContainer.addEventListener('click', () => { removeCreateNewColor(indexColor) });
+
+function removeCreateNewColor() {
+  let addCustomColorContainer = getElementByMatchedIdNumber(event.currentTarget.id, 'add-custom-color-container-');
+  let customColorContainer = document.querySelectorAll('.custom-color');
+  
+  if (customColorContainer.length > 1) addCustomColorContainer.remove();
+}
+
+function addCreateNewColor() {
+  indexColor++; 
+  customBulmaVariableContainer.insertAdjacentHTML('beforeend', template.addBulmaCustomColorTemplate(indexColor));
+  addCustomColorContainer = document.getElementById('custom-color-plus-button-' + indexColor);
+  removeCustomColorContainer = document.getElementById('custom-color-trash-button-' + indexColor);
+  removeCustomColorContainer.addEventListener('click', () => { removeCreateNewColor() });
+  addCustomColorContainer.onclick = () => { addCreateNewColor() };
+}
 
 compileButton.addEventListener('click', async () => {
   if (!isThereAnyEmptyClassName() && isClassNameValid()) {
     try {
       compileButton.classList.add('is-loading');
       let sassString = createSassString();
-  
       const response = await fetch('/compile-sass', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -270,7 +323,7 @@ compileButton.addEventListener('click', async () => {
   
       cssContent = await response.text();
       let customClassesString = createCustomCss();
-      if (customClassesString) cssContent += `${cssContent} \n${customClassesString}`;
+      if (customClassesString) cssContent = `${cssContent} \n${customClassesString}`;
   
       compileButton.classList.remove('is-loading');
       testCSSCheckBox[1].checked = false;
