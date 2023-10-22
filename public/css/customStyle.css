@@ -3,6 +3,18 @@ select {
   width: 100%;
 }
 
+.bulma-color-variable {
+  width: 19%;
+}
+
+.multiple-input-number-size {
+  width: 34%;
+}
+
+.max-label-size-multiple-input {
+  width: 25%;
+}
+
 .is-small-custom {
   width: 30%;
 }
@@ -16,12 +28,31 @@ select {
   width: 19%;
 }
 
+.custom-color-align {
+  top: 0;
+  position: absolute;
+  margin-top: 1vmax;
+}
+
+.max-label-custom-color-size {
+  align-items: flex-start;
+  width: 48%;
+}
+
 .max-label-image-size {
   width: 32%;
 }
 
 .input-number-size {
   width: 55%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.bulma-font {
+  width: 40%;
 }
 
 input[type="color"] {
@@ -66,7 +97,7 @@ input[type="color"] {
   height: 2em;
   border-radius: 50%;
   box-shadow: 1px 1px 3px 0px grey;
-  margin: 1em;
+  margin: 0em 1em 0em 1em;
 }
 
 .footer {
