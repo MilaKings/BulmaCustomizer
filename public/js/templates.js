@@ -77,7 +77,7 @@ function createCustomAttributes(json, index) {
 
     if (property.type === 'color') {
       formElement += `
-      <div class="field is-flex is-flex-direction-column is-justify-content-space-evenly max-label-color-size">
+      <div class="field is-flex is-flex-direction-column is-align-items-center is-justify-content-space-evenly max-label-color-size">
         <div class="control is-flex is-flex-direction-row level-item">
           <strong class="is-size-6 custom-class-attribute">${property.name}</strong>
           <div class="cp_wrapper">
@@ -86,7 +86,7 @@ function createCustomAttributes(json, index) {
     } else if (property.type === 'number') {
       formElement += `
       <div class="field">
-        <input class="input input-number-size custom-class-value ${property.unity ? 'has-unity' : ''}" type="number" id="${property.name}-${index}" ${property.unity ? 'placeholder="in %"' : ''} disabled>`;
+        <input class="input input-number-size custom-class-value ${property.unity ? 'has-unity' : ''}" type="number" id="${property.name}-${index}" ${property.unity ? 'placeholder="' + property.unity + '"' : ''} disabled>`;
     } else if (property.type === 'drop-down') {
       formElement += `
       <div class="select">

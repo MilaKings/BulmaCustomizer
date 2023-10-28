@@ -6,24 +6,129 @@
       "subtype": "font"
     },
     {
-      "name": "background-color",
-      "type": "color",
-      "subtype": "background"
-    },
-    {
-      "name": "outline-color",
-      "type": "color",
-      "subtype": "outline"
-    },
-    {
-      "name": "background-image",
-      "type": "image",
-      "subtype": "background"
-    },
-    {
       "name": "font-size",
       "type": "number",
       "subtype": "font",
+      "unity": "%"
+    },
+    {
+      "name": "text-align",
+      "type": "drop-down",
+      "values": [
+        "left",
+        "right",
+        "center",
+        "justify"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "text-transform",
+      "type": "drop-down",
+      "values": [
+        "uppercase",
+        "lowercase",
+        "capitalize",
+        "none",
+        "full-width",
+        "inherit",
+        "initial",
+        "unset"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "text-decoration",
+      "type": "drop-down",
+      "values": [
+        "none",
+        "underline",
+        "overline",
+        "line-through",
+        "blink"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "text-overflow",
+      "type": "drop-down",
+      "values": [
+        "clip",
+        "ellipsis"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "white-space",
+      "type": "drop-down",
+      "values": [
+        "normal",
+        "nowrap",
+        "pre",
+        "pre-line",
+        "pre-wrap",
+        "break-spaces"
+      ]
+    },
+    {
+      "name": "line-height",
+      "type": "number",
+      "unity": "%"
+    },
+    {
+      "name": "font-weight",
+      "type": "drop-down",
+      "values": [
+        "normal",
+        "bold",
+        "bolder",
+        "lighter"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "letter-spacing",
+      "type": "number",
+      "unity": "px",
+      "subtype": "font"
+    },
+    {
+      "name": "word-spacing",
+      "type": "number",
+      "unity": "px",
+      "subtype": "font"
+    },
+    {
+      "name": "overflow",
+      "type": "drop-down",
+      "values": [
+        "visible",
+        "hidden",
+        "scroll",
+        "auto"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "overflow-wrap",
+      "type": "drop-down",
+      "values": [
+        "normal",
+        "break-word",
+        "anywhere"
+      ],
+      "subtype": "font"
+    },
+    {
+      "name": "letter-spacing",
+      "type": "number",
+      "unity": "px",
+      "subtype": "font"
+    },
+    {
+      "name": "border-radius",
+      "type": "number",
+      "subtype": "border",
       "unity": "%"
     },
     {
@@ -70,17 +175,6 @@
       "unity": "%"
     },
     {
-      "name": "text-align",
-      "type": "drop-down",
-      "values": [
-        "left",
-        "right",
-        "center",
-        "justify"
-      ],
-      "subtype": "font"
-    },
-    {
       "name": "display",
       "type": "drop-down",
       "values": [
@@ -105,58 +199,6 @@
         "sticky"
       ],
       "subtype": "flex"
-    },
-    {
-      "name": "float",
-      "type": "drop-down",
-      "values": [
-        "left",
-        "right",
-        "none"
-      ]
-    },
-    {
-      "name": "overflow",
-      "type": "drop-down",
-      "values": [
-        "visible",
-        "hidden",
-        "scroll",
-        "auto"
-      ],
-      "subtype": "font"
-    },
-    {
-      "name": "text-transform",
-      "type": "drop-down",
-      "values": [
-        "uppercase",
-        "lowercase",
-        "capitalize",
-        "none",
-        "full-width",
-        "inherit",
-        "initial",
-        "unset"
-      ],
-      "subtype": "font"
-    },
-    {
-      "name": "text-decoration",
-      "type": "drop-down",
-      "values": [
-        "none",
-        "underline",
-        "overline",
-        "line-through",
-        "blink"
-      ],
-      "subtype": "font"
-    },
-    {
-      "name": "line-height",
-      "type": "number",
-      "unity": "%"
     },
     {
       "name": "flex-direction",
@@ -209,88 +251,6 @@
       "subtype": "flex"
     },
     {
-      "name": "background-repeat",
-      "type": "drop-down",
-      "values": [
-        "repeat",
-        "repeat-x",
-        "repeat-y",
-        "no-repeat",
-        "space",
-        "no-repeat"
-      ],
-      "subtype": "background"
-    },
-    {
-      "name": "background-size",
-      "type": "drop-down",
-      "values": [
-        "valor",
-        "auto",
-        "cover",
-        "contain"
-      ],
-      "subtype": "background"
-    },
-    {
-      "name": "opacity",
-      "type": "number"
-    },
-    {
-      "name": "z-index",
-      "type": "number"
-    },
-    {
-      "name": "border-radius",
-      "type": "number",
-      "subtype": "border",
-      "unity": "%"
-    },
-    {
-      "name": "font-weight",
-      "type": "drop-down",
-      "values": [
-        "normal",
-        "bold",
-        "bolder",
-        "lighter"
-      ],
-      "subtype": "font"
-    },
-    {
-      "name": "letter-spacing",
-      "type": "number",
-      "unity": "em",
-      "subtype": "font"
-    },
-    {
-      "name": "word-spacing",
-      "type": "number",
-      "unity": "em",
-      "subtype": "font"
-    },
-    {
-      "name": "white-space",
-      "type": "drop-down",
-      "values": [
-        "normal",
-        "nowrap",
-        "pre",
-        "pre-line",
-        "pre-wrap",
-        "break-spaces"
-      ]
-    },
-    {
-      "name": "text-overflow",
-      "type": "drop-down",
-      "values": [
-        "clip",
-        "ellipsis"
-      ],
-      "subtype": "font"
-    },
-    {
       "name": "vertical-align",
       "type": "drop-down",
       "values": [
@@ -306,45 +266,6 @@
       "subtype": "flex"
     },
     {
-      "name": "outline-width",
-      "type": "number",
-      "subtype": "outline",
-      "unity": "%"
-    },
-    {
-      "name": "outline-style",
-      "type": "drop-down",
-      "values": [
-        "none",
-        "hidden",
-        "dotted",
-        "dashed",
-        "solid",
-        "double",
-        "groove",
-        "ridge",
-        "inset",
-        "outset"
-      ],
-      "subtype": "outline"
-    },
-    {
-      "name": "overflow-wrap",
-      "type": "drop-down",
-      "values": [
-        "normal",
-        "break-word",
-        "anywhere"
-      ],
-      "subtype": "font"
-    },
-    {
-      "name": "letter-spacing",
-      "type": "number",
-      "unity": "em",
-      "subtype": "font"
-    },
-    {
       "name": "flex-wrap",
       "type": "drop-down",
       "values": [
@@ -353,6 +274,23 @@
         "wrap-reverse"
       ],
       "subtype": "flex"
+    },
+    {
+      "name": "float",
+      "type": "drop-down",
+      "values": [
+        "left",
+        "right",
+        "none"
+      ]
+    },
+    {
+      "name": "opacity",
+      "type": "number"
+    },
+    {
+      "name": "z-index",
+      "type": "number"
     },
     {
       "name": "object-fit",
@@ -403,6 +341,67 @@
         "zoom-in",
         "zoom-out"
       ]
+    },
+    {
+      "name": "outline-color",
+      "type": "color",
+      "subtype": "outline"
+    },
+    {
+      "name": "outline-width",
+      "type": "number",
+      "subtype": "outline",
+      "unity": "px"
+    },
+    {
+      "name": "outline-style",
+      "type": "drop-down",
+      "values": [
+        "none",
+        "hidden",
+        "dotted",
+        "dashed",
+        "solid",
+        "double",
+        "groove",
+        "ridge",
+        "inset",
+        "outset"
+      ],
+      "subtype": "outline"
+    },
+    {
+      "name": "background-repeat",
+      "type": "drop-down",
+      "values": [
+        "repeat",
+        "repeat-x",
+        "repeat-y",
+        "no-repeat",
+        "space",
+        "no-repeat"
+      ],
+      "subtype": "background"
+    },
+    {
+      "name": "background-size",
+      "type": "drop-down",
+      "values": [
+        "auto",
+        "cover",
+        "contain"
+      ],
+      "subtype": "background"
+    },
+    {
+      "name": "background-color",
+      "type": "color",
+      "subtype": "background"
+    },
+    {
+      "name": "background-image",
+      "type": "image",
+      "subtype": "background"
     }
   ]
 }
