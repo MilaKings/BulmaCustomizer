@@ -68,7 +68,7 @@ function createSassString() {
     if ((item.id === "$family-primary") || (item.id === "$family-sans-serif")) {
       urlFont = extractFontFamilyFromUrl(item.value);
       importUrlString += `@import url('https://fonts.googleapis.com/css?family=${urlFont}');\n`;
-      fontVariables += `\n${item.id}: ${urlFont.replace('+', ' ')}, sans-serif;`;
+      fontVariables += `\n${item.id}: ${urlFont.replaceAll('+', ' ')}, sans-serif;`;
     } else {
       const classes = item.className.split(' ');
       let unity = '';
@@ -129,11 +129,12 @@ function createCustomCss() {
       let attributeValue = customClass[i].querySelectorAll('.custom-class-value');
 
       for (let j = 0; j < customAttribute.length; j++) {
+        console.log(attributeValue);
         if (!attributeValue[j].disabled && attributeValue[j].value) {
           if (attributeValue[j].classList.contains('file-input')) {
-            customAttributesString += `\n${customAttribute[j].textContent}: url('${attributeValue[j].value}');`;
+            customAttributesString += `\n  ${customAttribute[j].textContent}: url('${attributeValue[j].value}');`;
           } else {
-            customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value}${attributeValue[j].classList.contains('has-unity') ? '%' : ''};`;
+            customAttributesString += `\n  ${customAttribute[j].textContent}: ${attributeValue[j].value}${attributeValue[j].placeholder ? attributeValue[j].placeholder : ''};`;
           }
         }
       }
@@ -353,6 +354,7 @@ compileButton.addEventListener('click', async () => {
     try {
       compileButton.classList.add('is-loading');
       let sassString = createSassString();
+      console.log(sassString);
       const response = await fetch('/compile-sass', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
