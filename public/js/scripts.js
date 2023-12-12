@@ -132,9 +132,9 @@ function createCustomCss() {
         console.log(attributeValue);
         if (!attributeValue[j].disabled && attributeValue[j].value) {
           if (attributeValue[j].classList.contains('file-input')) {
-            customAttributesString += `\n${customAttribute[j].textContent}: url('${attributeValue[j].value}');`;
+            customAttributesString += `\n  ${customAttribute[j].textContent}: url('${attributeValue[j].value}');`;
           } else {
-            customAttributesString += `\n${customAttribute[j].textContent}: ${attributeValue[j].value}${attributeValue[j].placeholder ? attributeValue[j].placeholder : ''};`;
+            customAttributesString += `\n  ${customAttribute[j].textContent}: ${attributeValue[j].value}${attributeValue[j].placeholder ? attributeValue[j].placeholder : ''};`;
           }
         }
       }
